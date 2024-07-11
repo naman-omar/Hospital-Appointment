@@ -7,6 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        primaryColor: "#0067FF",
         buttonBgColor: "#0067FF",
         yellorColor: "#FEB60D",
         purpleColor: "#9771FF",
