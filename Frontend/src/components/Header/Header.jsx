@@ -1,9 +1,9 @@
-import React from "react";
-import { useEffect,useRef } from "react";
+import React, { useState } from "react";
+import { useEffect,useRef} from "react";
 import userImg from '../../assets/images/avatar-icon.png';
 import logo from '../../assets/images/logo.png';
 import { NavLink,Link} from "react-router-dom";
-import {BiMenu} from 'react-icons/bi';
+import { BiMenu, BiX } from 'react-icons/bi';
 
 const navLinks = [
     {
@@ -25,26 +25,28 @@ const navLinks = [
 ];
 
 const Header = () => {
+    let [menuStatus,setMenuStatus] = useState(false);
     const headerRef = useRef(null);
     const menuRef = useRef(null);
 
-    const handleStickyHeader = () => {
-        window.addEventListener("scroll", () => {
-            if(document.body.scrollTop > 80 || document.documentElement.scrollTop > 80){
-                headerRef.current.classList.add("sticky_header");
-            }
-            else{
-                headerRef.current.classList.remove("sticky_header");
-            }
-        });
-    };
+    // const handleStickyHeader = () => {
+    //     window.addEventListener("scroll", () => {
+    //         if(document.body.scrollTop > 80 || document.documentElement.scrollTop > 80){
+    //             headerRef.current.classList.add("sticky_header");
+    //         }
+    //         else{
+    //             headerRef.current.classList.remove("sticky_header");
+    //         }
+    //     });
+    // };
 
-    useEffect(() => {
-        handleStickyHeader()
-        return () => window.removeEventListener('scroll',handleStickyHeader)
-    });
+    // useEffect(() => {
+    //     handleStickyHeader()
+    //     return () => window.removeEventListener('scroll',handleStickyHeader)
+    // });
 
     const toggleMenu = () => {
+        setMenuStatus(!menuStatus);
         menuRef.current.classList.toggle("show_menu");
     }
 
@@ -55,8 +57,8 @@ const Header = () => {
                     <div>
                         <img src={logo} className="h-[35px] w-[140px]" alt="logo"/>
                     </div>
-                    <div className="navigation" ref={menuRef} onClick={toggleMenu}>
-                        <ul className="menu flex gap-[2.7rem] items-center" onClick={toggleMenu}>
+                    <div className="navigation" ref={menuRef}>
+                        <ul className="menu flex gap-[2.7rem] items-center">
                         {
                             navLinks.map((link,idx) =>                    
                                 <li key={idx}><NavLink to={link.path} className={navClass=> navClass.isActive ? ' text-primaryColor text-[16px] leading-7 font-[600]': 'text-textColor text-[16px] leading-7 font-[500] hover:text-primaryColor'}>{link.display}</NavLink></li>
@@ -78,7 +80,7 @@ const Header = () => {
                             </Link>
                         </div>
                         <span className="bar" onClick={toggleMenu}>
-                            <BiMenu className="w-6 h-6 cursor-pointer" />
+                            {!menuStatus ? <BiMenu className="w-8 h-8 cursor-pointer" /> : <BiX className="w-8 h-8 cursor-pointer" />}
                         </span>
                     </div>
                 </div>

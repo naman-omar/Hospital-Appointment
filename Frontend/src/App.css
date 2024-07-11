@@ -10,7 +10,7 @@ body{
   font-family: "Manrope", sans-serif;
 }
 
-.sticky_header{
+.header{
   position: sticky;
   top: 0;
   z-index: 100;
@@ -53,5 +53,6 @@ body{
 
   .bar{
     display: block;
+    z-index: 50;
   }
 }

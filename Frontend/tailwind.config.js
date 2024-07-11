@@ -9,7 +9,7 @@ export default {
       colors: {
         primaryColor: "#0067FF",
         buttonBgColor: "#0067FF",
-        yellorColor: "#FEB60D",
+        yellowColor: "#FEB60D",
         purpleColor: "#9771FF",
         irisBlueColor: "#01B5C5",
         headingColor: "#181A1E",
