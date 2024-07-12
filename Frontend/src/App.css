@@ -56,3 +56,19 @@ body{
     z-index: 50;
   }
 }
+
+.swiper{
+  padding-bottom: 70px !important;
+}
+
+@media (min-width: 570px){
+  .swiper-slide.swiper-slide-next{
+    background-color: #0067ff;
+    border-radius: 12px;
+    box-shadow: 0px 20px 40px rgba(0, 103, 255, 0.3) !important;
+  }
+  
+  .swiper-slide.swiper-slide-next h4, .swiper-slide.swiper-slide-next p{
+    color: #fff !important;
+  }
+}

@@ -7,17 +7,20 @@ import avatarIcon from '../assets/images/avatar-icon.png'
 import icon01 from '../assets/images/icon01.png'
 import icon02 from '../assets/images/icon02.png'
 import icon03 from '../assets/images/icon03.png'
+import faqImg from '../assets/images/faq-img.png'
 import videoIcon from '../assets/images/video-icon.png'
 import { BsArrowRightCircle } from "react-icons/bs"
 import { Link } from "react-router-dom"
 import About from "../components/About/About"
 import ServiceList from "../components/Services/ServiceList"
 import DoctorList from "../components/Doctors/DoctorList"
+import FaqList from "../components/Faq/FaqList"
+import Testimonials from "../components/Testimonials/Testimonials"
 
 const Home = () => {
     return (
         <div>
-            <section className="hero_section pt-[60px] lg:h-[750px]">
+            <section className="hero_section lg:pt-[60px] pt-[30px] lg:h-[750px]">
                 <div className="container">
                     <div className="flex flex-col lg:flex-row gap-[90px] items-center justify-between">
                         <div>
@@ -157,10 +160,27 @@ const Home = () => {
                     <DoctorList/>
                 </div>
             </section>
-            <section>
+            <section className="lg:pt-[60px]">
                 <div className="container">
-                    
+                    <div className="flex justify-between gap-[50px] lg:gap-0">
+                        <div className="w-[40%] md:block hidden">
+                            <img className="mt-[-2rem]" src={faqImg} alt="faqImg"/>
+                        </div>
+                        <div className="w-full md:w-1/2">
+                            <h2 className="heading">Most frequent questions <span className="xl:inline hidden">by our beloved patients</span></h2>
+                            <FaqList/>
+                        </div>
+                    </div>
                 </div>
+            </section>
+            <section className="pb-0">
+                <div className="container">
+                <div className="max-w-[470px] mx-auto">
+                        <h2 className="heading text-center">What our patients say</h2>
+                        <p className="text_para text-center">World-class care for everyone. Our health System offers unmatched, expert healthcare.</p>
+                    </div>
+                </div>
+                <Testimonials/>
             </section>
         </div>
     );
