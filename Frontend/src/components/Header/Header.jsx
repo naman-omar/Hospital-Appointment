@@ -55,7 +55,7 @@ const Header = () => {
             <div className="container">
                 <div className="flex justify-between items-center"> 
                     <div>
-                        <img src={logo} className="h-[35px] w-[140px]" alt="logo"/>
+                        <Link to="/Home"><img src={logo} className="h-[35px] w-[140px]" alt="logo"/></Link>
                     </div>
                     <div className="navigation" ref={menuRef}>
                         <ul className="menu flex gap-[2.7rem] items-center">

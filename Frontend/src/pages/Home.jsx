@@ -2,13 +2,17 @@ import React from "react"
 import heroImg01 from '../assets/images/hero-img01.png'
 import heroImg02 from '../assets/images/hero-img02.png'
 import heroImg03 from '../assets/images/hero-img03.png'
+import featureImg from '../assets/images/feature-img.png'
+import avatarIcon from '../assets/images/avatar-icon.png'
 import icon01 from '../assets/images/icon01.png'
 import icon02 from '../assets/images/icon02.png'
 import icon03 from '../assets/images/icon03.png'
+import videoIcon from '../assets/images/video-icon.png'
 import { BsArrowRightCircle } from "react-icons/bs"
 import { Link } from "react-router-dom"
 import About from "../components/About/About"
 import ServiceList from "../components/Services/ServiceList"
+import DoctorList from "../components/Doctors/DoctorList"
 
 const Home = () => {
     return (
@@ -106,6 +110,56 @@ const Home = () => {
                         <p className="text_para text-center">World-class care for everyone. Our health System offers unmatched, expert healthcare.</p>
                     </div>
                     <ServiceList/>
+                </div>
+            </section>
+            <section>
+                <div className="container">
+                    <div className="flex items-center justify-between flex-col lg:flex-row">
+                        <div className="lg:w-[700px]">
+                            <h2 className="heading">Get virtual treatment<br/>anytime</h2>
+                            <ul className="pl-6 mt-4">
+                                <li className="text_para">1. Schedule the appointment directly.</li>
+                                <li className="text_para">2. Search for your physician here, and contact their office.</li>
+                                <li className="text_para">3. View our physician who are accepting new patients, use the online scheduling tool to select an appointment time.</li>
+                            </ul>
+                            <Link to="/"><button className="btn">Learn more</button></Link>
+                        </div>
+                        <div className="relative z-10 lg:w-[670px] flex justify-end mt-[50px] lg:mt-0">
+                            <img src={featureImg} className="w-3/4" alt="featureImg" />
+                            <div className="w-[150px] md:w-[200px] lg:w-[250px] py-4 absolute border bg-white bottom-[50px] left-[-20px] lg:left-5 md:bottom-[80px] z-10 rounded-[10px]">
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-2 lg:gap-4 px-4">
+                                        <p className="text-[10px] lg:text-[14px] leading-[10px] lg:leading-5 text-headingColor font-[600]">Tue, 24</p>
+                                        <p className="text-[10px] lg:text-[14px] leading-[10px] lg:leading-5 text-textColor font-[400]">10:00AM</p>
+                                        <span className="flex items-center justify-center bg-yellowColor py-1 px-1 rounded lg:py-1 lg:px-3">
+                                            <img src={videoIcon} className="lg:w-5 lg:h-5" alt="videoIcon" />
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="flex justify-center items-center w-[65px] lg:w-[96px] bg-[#CCF0F3] px-3 py-1 lg:py-2 lg:px-3 text-[8px] leading-[8px] lg:text-[12px] lg:leading-4 text-irisBlueColor font-[500] mt-2 rounded-full mx-3">
+                                    Consultation
+                                </div>
+                                <div className="flex items-center gap-[6px] lg:gap-[10px] mt-3 mx-4 ">
+                                    <img src={avatarIcon} alt="avatarIcon" />
+                                    <h4 className="text-[10px] leading-3 lg:text-[16px] lg:leading-[22px] font-[700] text-headingColor">Wayne Collins</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section className="lg:pt-[60px]">
+                <div className="container">
+                    <div className="max-w-[470px] mx-auto">
+                        <h2 className="heading text-center">Our Great Doctors</h2>
+                        <p className="text_para text-center">World-class care for everyone. Our health System offers unmatched, expert healthcare.</p>
+                    </div>
+                    <DoctorList/>
+                </div>
+            </section>
+            <section>
+                <div className="container">
+                    
                 </div>
             </section>
         </div>
