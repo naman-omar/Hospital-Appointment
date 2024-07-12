@@ -76,7 +76,7 @@ const Footer = () => {
                 <div className="flex justify-between flex-col md:flex-row flex-wrap gap-8">
                     <div>
                         <img src={Logo} alt="logo" />
-                        <p className="text-[16px] text-textColor font-[400] leading-7 mt-2">Copyright &copy; {year} developed by Naman all rights reserved </p>
+                        <p className="text-[16px] text-textColor font-[400] leading-7 mt-2">Copyright &copy; {year} developed by Naman <span className="block lg:inline-block">all rights reserved</span> </p>
                         <div className="flex items-center gap-3 mt-4">
                             {socialLinks.map((link,idx) => {
                                 return <Link to={link.path} key={idx} className="w-10 h-10 border border-black rounded-full flex items-center justify-center group hover:bg-primaryColor hover:border-none">{link.icon}</Link>
