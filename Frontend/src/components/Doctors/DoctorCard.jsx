@@ -20,8 +20,8 @@ const DoctorCard = ({doctor}) => {
             </div>
             <div className="flex justify-between mt-[10px] lg:mt-2 items-center">
                 <div>
-                    <h3 className="text-[16px] leading-7 lg:text-[18px] lg:leading-[30px] font-600 text-headingColor">+{totalPatients} patients</h3>
-                    <p className="text-[14px] leading-6 font-[400] text-textColor">At {hospital}</p>
+                    <h3 className="text-[16px] leading-7 lg:leading-[30px] font-600 text-headingColor">+{totalPatients} patients</h3>
+                    <p className="text-[13px] leading-6 font-[400] text-textColor">At {hospital}</p>
                 </div>
                 <Link to="/doctors" className="w-9 h-9 mt-4 rounded-full flex items-center justify-center hover:bg-primaryColor hover:text-white"><BsArrowRightCircle className="w-8 h-8"/></Link>
             </div>

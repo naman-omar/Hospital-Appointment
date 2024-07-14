@@ -71,7 +71,7 @@ const Footer = () => {
     const year = new Date().getFullYear();
 
     return(
-        <footer className="pb-16 pt-10 mt-[-5rem]">
+        <footer className="pb-16 pt-10 mt-8">
             <div className="container">
                 <div className="flex justify-between flex-col md:flex-row flex-wrap gap-8">
                     <div>
@@ -87,19 +87,19 @@ const Footer = () => {
                         <div className="flex flex-col items-start gap-4 text-[14px] font-[400] text-textColor">
                             <h2 className="text-[18px] leading-[30px] font-[700] mb-4 text-headingColor">Quick Links</h2>
                             {quickLinks1.map((link,idx) => {
-                                return <Link to={link.path} key={idx}>{link.display}</Link>
+                                return <Link className="hover:underline hover:text-primaryColor" to={link.path} key={idx}>{link.display}</Link>
                             })}
                         </div>
                         <div className="flex flex-col items-start gap-4 text-[14px] font-[400] text-textColor">
                             <h2 className="text-[18px] leading-[30px] font-[700] mb-4 text-headingColor">I want to</h2>
                             {quickLinks2.map((link,idx) => {
-                                return <Link to={link.path} key={idx}>{link.display}</Link>
+                                return <Link className="hover:underline hover:text-primaryColor" to={link.path} key={idx}>{link.display}</Link>
                             })}
                         </div>
                         <div className="flex flex-col items-start gap-4 text-[14px] font-[400] text-textColor">
                             <h2 className="text-[18px] leading-[30px] font-[700] mb-4 text-headingColor">Support</h2>
                             {quickLinks3.map((link,idx) => {
-                                return <Link to={link.path} key={idx}>{link.display}</Link>
+                                return <Link className="hover:underline hover:text-primaryColor" to={link.path} key={idx}>{link.display}</Link>
                             })}
                         </div>
                     </div>

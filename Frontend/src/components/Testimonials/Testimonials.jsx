@@ -10,7 +10,7 @@ import { HiStar } from 'react-icons/hi';
 const Testimonials = () => {
     return (
         <div className="container">
-            <div className="mt-[30px] lg:mt-[100px] h-[400px] pb-0">
+            <div className="mt-[30px] lg:mt-[100px] pb-0">
                 <Swiper
                     modules={[Pagination, Autoplay]} 
                     spaceBetween={30}

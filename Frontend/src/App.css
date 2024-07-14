@@ -61,7 +61,7 @@ body{
   padding-bottom: 70px !important;
 }
 
-@media (min-width: 570px){
+@media (min-width: 976px){
   .swiper-slide.swiper-slide-next{
     background-color: #0067ff;
     border-radius: 12px;

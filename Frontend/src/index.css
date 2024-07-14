@@ -32,6 +32,14 @@
     .hero_section{
         @apply bg-[url('./assets/images/hero-bg.png')] bg-no-repeat bg-cover bg-center;
     }
+
+    .form_label{
+        @apply text-textColor font-[600] text-[16px] leading-7 mb-2;
+    }
+
+    .form_input{
+        @apply text-headingColor w-full px-4 py-3 border border-solid border-[#0066ff61] focus:outline-none focus:border-primaryColor leading-7 placeholder:text-textColor placeholder:md:text-[18px] text-[16px] md:text-[18px] cursor-pointer rounded-md;
+    }
 }
 
 @media (max-width: 1024px){
