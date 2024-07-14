@@ -28,8 +28,8 @@ const Doctors = () => {
                             <h2 className="heading text-center">What our patients say</h2>
                             <p className="text_para text-center">World-class care for everyone. Our health System offers unmatched, expert healthcare.</p>
                     </div>
-                    <Testimonials/>
                 </div>
+                <Testimonials/>
             </section>
         </>
     );
