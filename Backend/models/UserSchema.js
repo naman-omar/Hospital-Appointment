@@ -1,28 +1,19 @@
 import mongoose from "mongoose";
 
-const reviewSchema = new mongoose.Schema(
-  {
-    doctor: {
-      type: mongoose.Types.ObjectId,
-      ref: "Doctor",
-    },
-    user: {
-      type: mongoose.Types.ObjectId,
-      ref: "User",
-    },
-    reviewText: {
-      type: String,
-      required: true,
-    },
-    rating: {
-      type: Number,
-      required: true,
-      min: 0,
-      max: 5,
-      default: 0,
-    },
+const UserSchema = new mongoose.Schema({
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  name: { type: String, required: true },
+  phone: { type: Number },
+  photo: { type: String },
+  role: {
+    type: String,
+    enum: ["patient", "admin"],
+    default: "patient",
   },
-  { timestamps: true }
-);
+  gender: { type: String, enum: ["male", "female", "other"] },
+  bloodType: { type: String },
+  appointments: [{ type: mongoose.Types.ObjectId, ref: "Appointment" }],
+});
 
-export default mongoose.model("Review", reviewSchema);
+export default mongoose.model("User", UserSchema);
