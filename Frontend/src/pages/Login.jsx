@@ -1,5 +1,9 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../config.js";
+import {toast} from "react-toastify"; 
+import HashLoader from "react-spinners/HashLoader";
+import {authContext} from "../context/AuthContext.jsx"
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -7,8 +11,55 @@ const Login = () => {
     password: "",
   });
 
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const {dispatch} = useContext(authContext);
+
   const handleInputData = async (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
+    setFormData((prevState) => ({...prevState, [event.target.name]: event.target.value }));
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    //console.log('Form data:', formData); // Debugging log
+  
+    try {
+      const res = await fetch(`${BASE_URL}/auth/login`, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      
+      const resData = await res.json();
+  
+      if (!res.ok) {
+        throw new Error(resData.message || 'Registration failed');
+      }
+
+      dispatch({
+        type: 'LOGIN_SUCCESS',
+        payload: {
+          user: resData.data,
+          token: resData.token,
+          role: resData.role
+        }
+      })
+  
+      console.log(resData, "login data");
+
+      setLoading(false);
+      toast.success(resData.message || 'Registration successful');
+      navigate('/home');
+
+    } catch (err) {
+      //console.error('Error:', err); // Debugging log
+      toast.error(err.message || 'Something went wrong');
+      setLoading(false);
+    }
   };
 
   return (
@@ -17,7 +68,7 @@ const Login = () => {
         <h3 className="text-headingColor text-[22px] leading-9 font-bold mb-10">
           Hello! <span className="text-primaryColor">Welcome</span> Back 🎉
         </h3>
-        <form className="py-4 md:py-0">
+        <form onSubmit={handleFormSubmit} className="py-4 md:py-0">
           <div className="mb-5">
             <input
               type="email"
@@ -33,7 +84,7 @@ const Login = () => {
             <input
               type="password"
               placeholder="Enter Password"
-              name="email"
+              name="password"
               value={formData.password}
               onChange={handleInputData}
               className="w-full px-4 py-3 border-b border-solid border-[#00000070]    focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor cursor-pointer"
@@ -41,8 +92,8 @@ const Login = () => {
             />
           </div>
           <div className="mt-7">
-            <button className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3">
-              Login
+            <button type="submit" className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3">
+              {loading? <HashLoader size={25} color="#fff"/>: 'Login'}
             </button>
           </div>
           <p className="mt-5 text-textColor text-center">

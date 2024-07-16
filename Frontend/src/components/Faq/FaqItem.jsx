@@ -1,4 +1,4 @@
-import {React,useState} from "react";
+import {useState} from "react";
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 
 const FaqItem = ({item}) => {

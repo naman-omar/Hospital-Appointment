@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useEffect,useRef} from "react";
-import userImg from '../../assets/images/avatar-icon.png';
+import { useEffect,useRef, useContext} from "react";
+import userImg from '../../assets/images/user.jpg';
 import logo from '../../assets/images/logo.png';
 import { NavLink,Link} from "react-router-dom";
 import { BiMenu, BiX } from 'react-icons/bi';
-
+import { authContext } from "../../context/AuthContext";
 const navLinks = [
     {
         path: "/home",
@@ -28,6 +28,7 @@ const Header = () => {
     let [menuStatus,setMenuStatus] = useState(false);
     const headerRef = useRef(null);
     const menuRef = useRef(null);
+    const {user,role,token} = useContext(authContext);
 
     // const handleStickyHeader = () => {
     //     window.addEventListener("scroll", () => {
@@ -67,18 +68,18 @@ const Header = () => {
                         </ul>
                     </div>
                     <div className="flex items-center gap-4">
-                        <div className="hidden">
-                            <Link to="/">
+                        {token && user ? <div>
+                            <Link className="flex items-center gap-2" to={`${role === 'doctor' ? '/doctors/profile/me' : '/users/profile/me'}`}>
                                 <figure className="w-[35px] h-[35px] rounded-full">
-                                    <img src={userImg} alt="userImg" className="w-full rounded-full" />
+                                    <img src={user?.photo || userImg} alt="userImg" className="w-full rounded-full" />
                                 </figure>
+                                <h2 className="text-[600]">{user?.name}</h2>
                             </Link> 
-                        </div>
-                        <div>
+                        </div> : <div>
                             <Link to="/login">
                                 <button className="bg-primaryColor text-white py-2 px-6 font-600 h-9 flex items-center rounded-[50px]">Login</button>
                             </Link>
-                        </div>
+                        </div>}
                         <span className="bar" onClick={toggleMenu}>
                             {!menuStatus ? <BiMenu className="w-8 h-8 cursor-pointer" /> : <BiX className="w-8 h-8 cursor-pointer" />}
                         </span>

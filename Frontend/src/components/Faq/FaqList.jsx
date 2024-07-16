@@ -1,4 +1,4 @@
-import React from "react";
+
 import {faqs} from '../../assets/data/faqs'
 import FaqItem from "./FaqItem";
 
@@ -8,7 +8,7 @@ const FaqList = () => {
             {faqs.map((item,idx) => {
                 return <FaqItem item={item} key={idx} />
             })}
-        </div>
+        </div> 
     )
 }
 
