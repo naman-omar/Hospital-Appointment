@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useEffect,useRef, useContext} from "react";
-import userImg from '../../assets/images/user.jpg';
+import userImg from '../../assets/images/defaultUser.jpg';
 import logo from '../../assets/images/logo.png';
 import { NavLink,Link} from "react-router-dom";
 import { BiMenu, BiX } from 'react-icons/bi';
-import { authContext } from "../../context/AuthContext";
+import {authContext} from "../../context/AuthContext.jsx";
+
 const navLinks = [
     {
         path: "/home",
@@ -73,7 +74,6 @@ const Header = () => {
                                 <figure className="w-[35px] h-[35px] rounded-full">
                                     <img src={user?.photo || userImg} alt="userImg" className="w-full rounded-full" />
                                 </figure>
-                                <h2 className="text-[600]">{user?.name}</h2>
                             </Link> 
                         </div> : <div>
                             <Link to="/login">

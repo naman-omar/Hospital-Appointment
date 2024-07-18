@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState} from "react";
 import signupImg from "../assets/images/signup.gif";
 import { Link, useNavigate} from "react-router-dom";
 import uploadImageToCloudinary from "../utils/uploadCloudinary.js";
@@ -21,7 +21,7 @@ const Signup = () => {
   });
 
   const navigate = useNavigate();
-
+  
   const handleInputData = (event) => {
     setFormData(prevState => ({ ...prevState, [event.target.name]: event.target.value }));
   };
@@ -29,6 +29,7 @@ const Signup = () => {
   const handleFileInputChange = async (event) => {
     const file = event.target.files[0];
     const data = await uploadImageToCloudinary(file);
+    console.log(data); //debugging
     setPreviewUrl(data.url);
     setSelectedFile(data.url);
     setFormData(prevState => ({ ...prevState, photo: data.url }));
@@ -37,7 +38,7 @@ const Signup = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-    //console.log('Form data:', formData); // Debugging log
+    console.log('Form data:', formData); // Debugging log
   
     try {
       const res = await fetch(`${BASE_URL}/auth/register`, {
@@ -49,16 +50,19 @@ const Signup = () => {
       })
       
       const resData = await res.json();
-  
+      console.log(resData); //Debugging
+
       if (!res.ok) {
         throw new Error(resData.message || 'Registration failed');
       }
   
       setLoading(false);
-      toast.success(resData.message || 'Registration successful');
+      toast.success(resData.message || 'Registration successful')
+
       navigate('/login');
+      
     } catch (err) {
-      //console.error('Error:', err); // Debugging log
+      console.error('Error:', err); // Debugging log
       toast.error(err.message || 'Something went wrong');
       setLoading(false);
     }

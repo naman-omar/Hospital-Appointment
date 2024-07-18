@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../config.js";
 import {toast} from "react-toastify"; 
 import HashLoader from "react-spinners/HashLoader";
-import {authContext} from "../context/AuthContext.jsx"
+import {authContext} from "../context/AuthContext.jsx";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -24,7 +24,7 @@ const Login = () => {
     event.preventDefault();
     setLoading(true);
     //console.log('Form data:', formData); // Debugging log
-  
+
     try {
       const res = await fetch(`${BASE_URL}/auth/login`, {
         method: 'post',
@@ -33,9 +33,9 @@ const Login = () => {
         },
         body: JSON.stringify(formData)
       })
-      
+
       const resData = await res.json();
-  
+
       if (!res.ok) {
         throw new Error(resData.message || 'Registration failed');
       }
@@ -48,7 +48,7 @@ const Login = () => {
           role: resData.role
         }
       })
-  
+
       console.log(resData, "login data");
 
       setLoading(false);
@@ -92,7 +92,7 @@ const Login = () => {
             />
           </div>
           <div className="mt-7">
-            <button type="submit" className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3">
+            <button type="submit" className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3" disabled= {loading && true}>
               {loading? <HashLoader size={25} color="#fff"/>: 'Login'}
             </button>
           </div>
