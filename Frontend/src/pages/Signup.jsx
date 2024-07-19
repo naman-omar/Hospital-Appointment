@@ -1,16 +1,15 @@
-import { useState} from "react";
+import { useState } from "react";
 import signupImg from "../assets/images/signup.gif";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import uploadImageToCloudinary from "../utils/uploadCloudinary.js";
 import { BASE_URL } from "../config.js";
-import {toast} from "react-toastify"; 
+import { toast } from "react-toastify";
 import HashLoader from "react-spinners/HashLoader";
-
 
 const Signup = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
-  const [loading,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,9 +20,12 @@ const Signup = () => {
   });
 
   const navigate = useNavigate();
-  
+
   const handleInputData = (event) => {
-    setFormData(prevState => ({ ...prevState, [event.target.name]: event.target.value }));
+    setFormData((prevState) => ({
+      ...prevState,
+      [event.target.name]: event.target.value,
+    }));
   };
 
   const handleFileInputChange = async (event) => {
@@ -32,42 +34,40 @@ const Signup = () => {
     console.log(data); //debugging
     setPreviewUrl(data.url);
     setSelectedFile(data.url);
-    setFormData(prevState => ({ ...prevState, photo: data.url }));
+    setFormData((prevState) => ({ ...prevState, photo: data.url }));
   };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-    console.log('Form data:', formData); // Debugging log
-  
+    console.log("Form data:", formData); // Debugging log
+
     try {
       const res = await fetch(`${BASE_URL}/auth/register`, {
-        method: 'post',
+        method: "post",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData)
-      })
-      
+        body: JSON.stringify(formData),
+      });
+
       const resData = await res.json();
       console.log(resData); //Debugging
 
       if (!res.ok) {
-        throw new Error(resData.message || 'Registration failed');
+        throw new Error(resData.message || "Registration failed");
       }
-  
-      setLoading(false);
-      toast.success(resData.message || 'Registration successful')
 
-      navigate('/login');
-      
+      setLoading(false);
+      toast.success(resData.message || "Registration successful");
+
+      navigate("/login");
     } catch (err) {
-      console.error('Error:', err); // Debugging log
-      toast.error(err.message || 'Something went wrong');
+      console.error("Error:", err); // Debugging log
+      toast.error(err.message || "Something went wrong");
       setLoading(false);
     }
   };
-  
 
   return (
     <section className="px-5 xl:px-0 pt-[15px] lg:pt-[25px] pb-[30px]">
@@ -157,13 +157,15 @@ const Signup = () => {
                 </label>
               </div>
               <div className="mb-5 flex gap-4 ">
-                {selectedFile && <figure className="w-[50px] h-[50px] rounded-full flex items-center justify-center">
-                  <img
-                    src={previewUrl}
-                    alt="patient"
-                    className="w-full rounded-full border-2 border-[#0066ff61] border-solid"
-                  />
-                </figure>}
+                {selectedFile && (
+                  <figure className="w-[50px] h-[50px] rounded-full flex items-center justify-center">
+                    <img
+                      src={previewUrl}
+                      alt="patient"
+                      className="w-full rounded-full border-2 border-[#0066ff61] border-solid"
+                    />
+                  </figure>
+                )}
                 <div className="relative w-[160px] h-[50px]">
                   <input
                     type="file"
@@ -182,8 +184,11 @@ const Signup = () => {
                 </div>
               </div>
               <div className="mt-7">
-                <button disabled={loading && true} className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3">
-                  {loading? <HashLoader size={25} color="#fff"/> : 'Signup'}
+                <button
+                  disabled={loading && true}
+                  className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3"
+                >
+                  {loading ? <HashLoader size={25} color="#fff" /> : "Signup"}
                 </button>
               </div>
               <p className="mt-5 text-textColor text-center">

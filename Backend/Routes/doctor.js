@@ -7,7 +7,7 @@ import reviewRouter from "../Routes/review.js"
 
 router.get("/:doctorId/reviews", authenticate, reviewRouter);
 router.get("/:id", authenticate,restrict(['doctor']),getSingleDoctor);
-router.get("/", authenticate,restrict(['admin']),getAllDoctor);
+router.get("/",getAllDoctor);
 router.put("/:id", authenticate,restrict(['doctor']),updateDoctor);
 router.delete("/:id", authenticate,restrict(['doctor']),deleteDoctor);
 router.get("/profile/me", authenticate,restrict(['doctor']),getDoctorProfile);

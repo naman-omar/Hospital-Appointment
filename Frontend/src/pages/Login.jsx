@@ -1,9 +1,9 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../config.js";
-import {toast} from "react-toastify"; 
+import { toast } from "react-toastify";
 import HashLoader from "react-spinners/HashLoader";
-import {authContext} from "../context/AuthContext.jsx";
+import { authContext } from "../context/AuthContext.jsx";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -14,10 +14,13 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const {dispatch} = useContext(authContext);
+  const { dispatch } = useContext(authContext);
 
   const handleInputData = async (event) => {
-    setFormData((prevState) => ({...prevState, [event.target.name]: event.target.value }));
+    setFormData((prevState) => ({
+      ...prevState,
+      [event.target.name]: event.target.value,
+    }));
   };
 
   const handleFormSubmit = async (event) => {
@@ -27,37 +30,36 @@ const Login = () => {
 
     try {
       const res = await fetch(`${BASE_URL}/auth/login`, {
-        method: 'post',
+        method: "post",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData)
-      })
+        body: JSON.stringify(formData),
+      });
 
       const resData = await res.json();
 
       if (!res.ok) {
-        throw new Error(resData.message || 'Registration failed');
+        throw new Error(resData.message || "Registration failed");
       }
 
       dispatch({
-        type: 'LOGIN_SUCCESS',
+        type: "LOGIN_SUCCESS",
         payload: {
           user: resData.data,
           token: resData.token,
-          role: resData.role
-        }
-      })
+          role: resData.role,
+        },
+      });
 
       console.log(resData, "login data");
 
       setLoading(false);
-      toast.success(resData.message || 'Registration successful');
-      navigate('/home');
-
+      toast.success(resData.message || "Registration successful");
+      navigate("/home");
     } catch (err) {
       //console.error('Error:', err); // Debugging log
-      toast.error(err.message || 'Something went wrong');
+      toast.error(err.message || "Something went wrong");
       setLoading(false);
     }
   };
@@ -92,8 +94,12 @@ const Login = () => {
             />
           </div>
           <div className="mt-7">
-            <button type="submit" className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3" disabled= {loading && true}>
-              {loading? <HashLoader size={25} color="#fff"/>: 'Login'}
+            <button
+              type="submit"
+              className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3"
+              disabled={loading && true}
+            >
+              {loading ? <HashLoader size={25} color="#fff" /> : "Login"}
             </button>
           </div>
           <p className="mt-5 text-textColor text-center">
