@@ -1,2 +1,2 @@
-export const BASE_URL = "https://hospital-appointment-1-iamt.onrender.com";
+export const BASE_URL = "http://localhost:5000";
 export const token = localStorage.getItem('token');
