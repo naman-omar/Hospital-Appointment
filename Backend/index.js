@@ -15,7 +15,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 const corsOption = {
-  origin: "https://hospital-appointment-frontend-rqth.onrender.com"  // Replace with your frontend URL
+  origin: true  // Replace with your frontend URL
 };
 
 app.get("/", (req, res) => {
