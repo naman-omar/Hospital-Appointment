@@ -15,7 +15,9 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 const corsOption = {
-  origin: true,
+  origin: ["https://hospital-appointment-frontend-wheat.vercel.app"],
+  methods: ["POST", "GET", "PUT", "DELETE"],
+  credentials: true
 };
 
 app.get("/", (req, res) => {
