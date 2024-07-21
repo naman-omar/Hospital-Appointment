@@ -4,7 +4,7 @@ import { authenticate, restrict } from "../auth/verifyToken.js"
 
 const router = express.Router({mergeParams: true});
 
-router.get("/", authenticate, restrict(["admin"], getAllReviews));
-router.post("/", authenticate, restrict(["patient","admin"], createReview));
+router.get("/",getAllReviews);
+router.post("/", authenticate, createReview);
 
 export default router;

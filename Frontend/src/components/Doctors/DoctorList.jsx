@@ -13,9 +13,9 @@ const DoctorList = () => {
         {loading && <Loader/>}
         {!error && !loading && (
             <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-8 mt-[30px]">
-              {doctors.map((doctor) => {
-                return <DoctorCard doctor={doctor} key={doctor._id} />;
-              })}
+              {doctors.map((doctor,index ) => (
+                 index < 3 && (<DoctorCard doctor={doctor} key={doctor._id} />)
+              ))}
           </div>
         )}
     </div>

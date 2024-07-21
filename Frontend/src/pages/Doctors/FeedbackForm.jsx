@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { useParams } from "react-router-dom";
-import { BASE_URL, token } from "../../config";
+import { BASE_URL, token } from "../../config.js";
 import {toast} from "react-toastify"
-import Loading from "../../components/Loader/Loading";
+import Loading from "../../components/Loader/Loading.jsx";
 
 const FeedbackForm = () => {
   const [rating, setRating] = useState(0);
@@ -33,6 +33,7 @@ const FeedbackForm = () => {
       });
 
       const result = await res.json();
+      console.log("data",result);
 
       if (!res.ok) {
         throw new Error(result.message);
@@ -49,7 +50,7 @@ const FeedbackForm = () => {
 
   return (
     <div className="pt-30">
-      <form onSubmit={handleReviewSubmit}>
+      <form >
         <div>
           <h2 className="text-[22px] text-headingColor font-bold mb-4">
             Feedback Form
@@ -96,7 +97,7 @@ const FeedbackForm = () => {
             onChange={(e) => setReviewText(e.target.value)}
           ></textarea>
         </div>
-        <button type="submit" className="btn">
+        <button type="submit" onClick={handleReviewSubmit} className="btn">
           {loading ? <Loading/> : 'Submit Feedback'}
         </button>
       </form>

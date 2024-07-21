@@ -9,7 +9,7 @@ import icon03 from "../assets/images/icon03.png";
 import faqImg from "../assets/images/faq-img.png";
 import videoIcon from "../assets/images/video-icon.png";
 import { BsArrowRightCircle } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import About from "../components/About/About";
 import ServiceList from "../components/Services/ServiceList";
 import DoctorList from "../components/Doctors/DoctorList";
@@ -17,6 +17,11 @@ import FaqList from "../components/Faq/FaqList";
 import Testimonials from "../components/Testimonials/Testimonials";
 
 const Home = () => {
+  const Navigate = useNavigate();
+  const handleReqBtnClick = () => {
+      Navigate("/doctors");
+  }
+
   return (
     <div>
       <section className="hero_section lg:pt-[60px] pt-[30px] lg:h-[750px]">
@@ -25,15 +30,12 @@ const Home = () => {
             <div>
               <div className="lg:w-[570px]">
                 <h1 className="text-[36px] leading-[46px] text-headingColor font-[800] md:text-[60px] md:leading-[70px]">
-                  We help patients live a healthy, longer life.
+                  We help patients live a healthy, longer life
                 </h1>
                 <p className="text_para">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Maiores itaque animi, voluptatum ipsa aperiam odit
-                  consequuntur ut, hic ullam nesciunt corporis, sapiente alias
-                  autem accusantium aliquid repellendus. Numquam, itaque magni.
+                Dedicated to providing exceptional medical care and support to ensure every patient enjoys the best possible health. Our team of experienced doctors work tirelessly to diagnose, treat, and manage various health conditions with compassion and expertise.
                 </p>
-                <button className="btn">Request an Appointment</button>
+                <button onClick={handleReqBtnClick}className="btn">Request an Appointment</button>
               </div>
               <div className="mt-[30px] lg:mt-[55px] flex flex-col sm:flex-row lg:items-center gap-4 lg:gap-[30px]">
                 <div>
@@ -87,7 +89,7 @@ const Home = () => {
             </h2>
             <p className="text_para text-center max-w-[470px]">
               World-class care for everyone. Our health System offers unmatched,
-              expert healthcare.
+              expert healthcare
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[80px] lg:gap-[30px] mt-[30px] lg:mt-[55px]">
@@ -97,8 +99,7 @@ const Home = () => {
                 Find a Doctor
               </div>
               <p className="text-[16px] leading-7 text-textColor font-[400] mt-1 text-center max-w-[470px]">
-                World-class care for everyone. Our health System offers
-                unmatched, expert healthcare.
+              Explore our list of expert doctors to find the perfect match for your healthcare needs
               </p>
               <Link to="/doctors">
                 <div className="w-9 h-9 mt-4 rounded-full flex items-center justify-center hover:bg-primaryColor hover:text-white">
@@ -112,10 +113,9 @@ const Home = () => {
                 Find a Location
               </div>
               <p className="text-[16px] leading-7 text-textColor font-[400] mt-1 text-center max-w-[470px]">
-                World-class care for everyone. Our health System offers
-                unmatched, expert healthcare.
+              Discover the nearest healthcare facility or doctor to you with our easy location finder
               </p>
-              <Link to="/doctors">
+              <Link to="/contact">
                 <div className="w-9 h-9 mt-4 rounded-full flex items-center justify-center hover:bg-primaryColor hover:text-white">
                   <BsArrowRightCircle className="w-8 h-8" />
                 </div>
@@ -127,8 +127,7 @@ const Home = () => {
                 Book Appointment
               </div>
               <p className="text-[16px] leading-7 text-textColor font-[400] mt-1 text-center max-w-[470px]">
-                World-class care for everyone. Our health System offers
-                unmatched, expert healthcare.
+              Secure your spot with a simple and convenient appointment booking process
               </p>
               <Link to="/doctors">
                 <div className="w-9 h-9 mt-4 rounded-full flex items-center justify-center hover:bg-primaryColor hover:text-white">
@@ -145,8 +144,7 @@ const Home = () => {
           <div className="max-w-[470px] mx-auto">
             <h2 className="heading text-center">Our medical services</h2>
             <p className="text_para text-center">
-              World-class care for everyone. Our health System offers unmatched,
-              expert healthcare.
+            Explore our diverse range of medical services designed to cater to all your health needs
             </p>
           </div>
           <ServiceList />
@@ -220,14 +218,14 @@ const Home = () => {
               expert healthcare.
             </p>
           </div>
-          <DoctorList />
+          <DoctorList/>
         </div>
       </section>
       <section className="lg:pt-[60px]">
         <div className="container">
           <div className="flex justify-between gap-[50px] lg:gap-0">
-            <div className="w-[40%] md:block hidden">
-              <img className="mt-[-2rem]" src={faqImg} alt="faqImg" />
+            <div className="w-[35%] md:block hidden">
+              <img className="mt-[-3rem]" src={faqImg} alt="faqImg" />
             </div>
             <div className="w-full md:w-1/2">
               <h2 className="heading">
@@ -246,9 +244,7 @@ const Home = () => {
           <div className="max-w-[470px] mx-auto">
             <h2 className="heading text-center">What our patients say</h2>
             <p className="text_para text-center">
-              World-class care for everyone. Our health System offers unmatched,
-              expert healthcare.
-            </p>
+            Discover what our patients are saying about their experiences with us through testimonials</p>
           </div>
         </div>
         <Testimonials />

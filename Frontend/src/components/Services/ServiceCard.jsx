@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 
 import { BsArrowRightCircle } from "react-icons/bs";
-import { Link } from "react-router-dom";
 
 const ServiceCard = ({ item, idx }) => {
   const { name, desc, bgColor, textColor } = item;
@@ -14,12 +13,12 @@ const ServiceCard = ({ item, idx }) => {
         {desc}
       </p>
       <div className="flex items-center justify-between mt-[30px] mr-10 md:mr-0 xl:mr-10">
-        <Link
-          to="/home"
+        
+        <div
           className="flex w-9 h-9 items-center justify-center rounded-full hover:bg-primaryColor hover:text-white"
         >
-          <BsArrowRightCircle className="w-8 h-8" />
-        </Link>
+        <BsArrowRightCircle className="w-8 h-8" />
+        </div>
         <span
           className="flex justify-center items-center w-[44px] h-[44px] text-[18px] leading-[30px] font-[600]}"
           style={{

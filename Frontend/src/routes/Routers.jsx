@@ -8,11 +8,15 @@ import DoctorDetails from "../pages/Doctors/DoctorDetails";
 import UserAccount from "../Dashboard/user-account/MyAccount.jsx";
 import DashBoard from "../Dashboard/doctor-account/Dashboard.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
+import ScrollToTop from "../components/ScrollToTop/ScrollToTop.jsx";
+import CheckoutSuccess from "../pages/CheckoutSuccess.jsx";
 
 import { Routes, Route } from "react-router-dom";
 
 const Routers = () => {
   return (
+    <>
+    <ScrollToTop/>
     <Routes>
       <Route path="/" element={<Home />}></Route>
       <Route path="/home" element={<Home />}></Route>
@@ -22,6 +26,7 @@ const Routers = () => {
       <Route path="/contact" element={<Contact />}></Route>
       <Route path="/doctors" element={<Doctors />}></Route>
       <Route path="/doctors/:id" element={<DoctorDetails />}></Route>
+      <Route path="/checkout-success" element={<CheckoutSuccess/>}></Route>
       <Route
         path="/users/profile/me"
         element={
@@ -39,6 +44,7 @@ const Routers = () => {
         }
       ></Route>
     </Routes>
+    </>
   );
 };
 

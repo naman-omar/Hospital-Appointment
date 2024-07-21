@@ -26,7 +26,7 @@ const DoctorDetails = () => {
                 <img src={doctor.photo} alt="doctorImg" className="w-full" />
               </figure>
               <div className="flex flex-col w-[98%]">
-                <span className="bg-[#CCF0F3] max-w-[40%] md:max-w-[30%] flex justify-center text-irisBlueColor py-1 px-4 text-[12px] leading-4 lg:text-[14px] lg:leading-7 font-[600] rounded">
+                <span className="bg-[#CCF0F3] flex items-center w-[55%] sm:w-[30%] md:w-[25%] text-irisBlueColor py-1 px-1 sm:px-4 text-[12px] leading-4 lg:text-[14px] lg:leading-7 font-[600] rounded">
                   {doctor.specialization}
                 </span>
                 <h3 className="text-headingColor text-[16px] md:text-[22px] mt-3 font-bold">
@@ -34,13 +34,13 @@ const DoctorDetails = () => {
                 </h3>
                 <div className="flex items-center gap-[6px]">
                   <span className="flex items-center gap-[6px] text-[14px] lg:text-[16px] leading-5 lg:leading-7 font-[600] text-headingColor">
-                    <img src={starIcon} alt="starIcon" /> {doctor.avgRating}
+                    <img src={starIcon} alt="starIcon" /> {doctor.averageRating}  
                   </span>
                   <span className="text-[13px] lg:text-[15px] leading-5 lg:leading-7 font-[400] text-textColor">
                     ({doctor.totalRating})
                   </span>
                 </div>
-                <p className="text-[12px] leading-5 md:text-[14px] lg:max-w-[390px]">
+                <p className="text-[12px] leading-5 md:text-[14px] md:max-w-[390px]">
                   {doctor.bio}
                 </p>
               </div>

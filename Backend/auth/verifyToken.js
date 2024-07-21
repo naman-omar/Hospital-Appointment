@@ -17,6 +17,7 @@ export const authenticate = async (req, res, next) => {
     const token = authToken.split(" ")[1];
     //verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    console.log("decoded",decoded);
     req.userId = decoded.id;
     req.role = decoded.role;
 
@@ -39,7 +40,7 @@ export const restrict = (roles) => async (req, res, next) => {
   } else {
     user = doctor;
   }
-  if (!roles.includes(user.role)) {
+  if (user.role && !roles.includes(user.role)) {
     return res
       .status(401)
       .json({ success: false, message: "You are not authorized" });

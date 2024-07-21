@@ -1,12 +1,36 @@
 import { createContext, useEffect, useReducer } from "react";
 
-const initialState = {
-  user: localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user"))
-    : null,
-  role: localStorage.getItem("role") || null,
-  token: localStorage.getItem("token") || null,
+const getInitialState = () => {
+  const initialState = {
+    user: null,
+    role: null,
+    token: null,
+  };
+
+  try {
+    const userFromStorage = localStorage.getItem("user");
+    if (userFromStorage) {
+      initialState.user = JSON.parse(userFromStorage);
+    }
+  } catch (e) {
+    console.error("Failed to parse user from localStorage", e);
+  }
+
+  initialState.role = localStorage.getItem("role") || null;
+  initialState.token = localStorage.getItem("token") || null;
+
+  return initialState;
 };
+
+const initialState = getInitialState();
+
+// const initialState = {
+//   user: localStorage.getItem("user")
+//     ? JSON.parse(localStorage.getItem("user"))
+//     : null,
+//   role: localStorage.getItem("role") || null,
+//   token: localStorage.getItem("token") || null,
+// };
 
 export const authContext = createContext(initialState);
 

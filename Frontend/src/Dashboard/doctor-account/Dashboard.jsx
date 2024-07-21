@@ -40,8 +40,8 @@ const Dashboard = () => {
               <div className="mt-8">
                 {tab === "overview" && (
                   <div>
-                    <div className="flex items-center gap-4 mb-10">
-                      <figure className="max-w-[200px] max-h-[200px]">
+                    <div className="flex items-center gap-4 mb-10 flex-col sm:flex-row">
+                      <figure className="self-start sm:self-center max-w-[200px] max-h-[200px]">
                         <img src={data.photo} alt="" className="w-full" />
                       </figure>
                       <div>

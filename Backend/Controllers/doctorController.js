@@ -41,29 +41,40 @@ export const getSingleDoctor = async (req, res) => {
       .status(200)
       .json({ success: true, message: "Doctor found", data: doctor });
   } catch (err) {
-    res.status(404).json({ success: false, message: "Doctor not found" });
+    res.status(500).json({ success: false, message: "Doctor not found" });
   }
 };
 
-export const getAllDoctor = async (req, res) => {
+// Controller function to get all doctors
+export const getAllDoctors = async (req, res) => {
   try {
-    const { name } = req.query;
+    const query = req.query.query;
     let doctors;
-    if (name) {
+
+    if (query) {
+      // Find doctors where the name or specialization matches the query and are approved
       doctors = await Doctor.find({
         isApproved: "approved",
-        name: { $regex: name, $options: "i" },
+        $or: [
+          { name: new RegExp(query, 'i') },
+          { specialization: new RegExp(query, 'i') }
+        ]
       }).select("-password");
     } else {
-      doctors = await Doctor.find({ isApproved: "approved" }).select(
-        "-password"
-      );
+      // Find all approved doctors if no query is provided
+      doctors = await Doctor.find({ isApproved: "approved" }).select("-password");
     }
-    res
-      .status(200)
-      .json({ success: true, message: "Doctors found", data: doctors });
+
+    // Handle case where no doctors are found
+    if (!doctors.length) {
+      return res.status(200).json({ success: true, message: "No doctors found" });
+    }
+
+    // Return the list of doctors
+    res.status(200).json({ success: true, message: "Doctors found", data: doctors });
   } catch (err) {
-    res.status(404).json({ success: false, message: "Not found" });
+    // Handle errors and send a 500 status code
+    res.status(500).json({ success: false, message: "Server error", error: err.message });
   }
 };
 
@@ -93,3 +104,17 @@ export const getDoctorProfile = async (req, res) => {
       .json({ success: false, message: "Something went wrong, cannot get" });
   }
 };
+
+export const deleteDoctorAccount = async (req, res) => {
+  console.log("hello")
+  const doctorId = req.userId; 
+  console.log("ID",id);
+
+  try {
+    await Doctor.findByIdAndDelete(doctorId);
+    res.status(200).json({ success: true, message: "Successfully Deleted Account" });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Failed to delete account" });
+  }
+};
+

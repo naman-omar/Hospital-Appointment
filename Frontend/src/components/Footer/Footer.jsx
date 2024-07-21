@@ -1,7 +1,7 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
 import Logo from "../../assets/images/logo.png";
-import { FaLinkedin, FaGithub, FaInstagram, FaGit } from "react-icons/fa";
+import { FaLinkedin, FaGithub, FaInstagram} from "react-icons/fa";
 
 const socialLinks = [
   {
@@ -20,45 +20,37 @@ const socialLinks = [
 
 const quickLinks1 = [
   {
-    path: "/home",
+    path: "/",
     display: "Home",
   },
   {
-    path: "/",
+    path: "/home",
     display: "About us",
   },
   {
     path: "/services",
     display: "Services",
   },
-  {
-    path: "/",
-    display: "Blog",
-  },
 ];
 
 const quickLinks2 = [
   {
-    path: "/doctor",
+    path: "/doctors",
     display: "Find a Doctor",
   },
   {
-    path: "/",
+    path: "/doctors",
     display: "Request an Appointment",
   },
   {
-    path: "/",
+    path: "/contact",
     display: "Find a Location",
-  },
-  {
-    path: "/",
-    display: "Get a Opinion",
   },
 ];
 
 const quickLinks3 = [
   {
-    path: "/",
+    path: "/contact",
     display: "Donate",
   },
   {
@@ -73,7 +65,7 @@ const Footer = () => {
   return (
     <footer className="pb-16 pt-10 mt-8">
       <div className="container">
-        <div className="flex justify-between flex-col md:flex-row flex-wrap gap-8">
+        <div className="flex justify-between flex-col sm:flex-row flex-wrap gap-8">
           <div>
             <img src={Logo} alt="logo" />
             <p className="text-[16px] text-textColor font-[400] leading-7 mt-2">
@@ -94,7 +86,7 @@ const Footer = () => {
               })}
             </div>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 xl:grid-cols-3 gap-8">
             <div className="flex flex-col items-start gap-4 text-[14px] font-[400] text-textColor">
               <h2 className="text-[18px] leading-[30px] font-[700] mb-4 text-headingColor">
                 Quick Links

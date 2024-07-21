@@ -187,11 +187,9 @@ const Profile = ({ doctorData }) => {
             name="email"
             value={formData.email}
             id="email"
+            onChange={handleInputChange}
             placeholder="Email Id"
             className="form_input"
-            aria-readonly
-            readOnly
-            disabled="true"
           />
         </div>
         <div className="mb-5">
@@ -220,7 +218,7 @@ const Profile = ({ doctorData }) => {
             id="bio"
             placeholder="Your Bio"
             className="form_input"
-            maxLength={100}
+            maxLength={200}
           />
         </div>
         <div>
@@ -259,7 +257,7 @@ const Profile = ({ doctorData }) => {
                 <option value="Surgeon">Surgeon</option>
                 <option value="Neurologist">Neurologist</option>
                 <option value="Dermatologist">Dermatologist</option>
-                <option value="Other">Other</option>
+                <option value="Physician">Physician</option>
               </select>
             </div>
             <div>
@@ -403,6 +401,7 @@ const Profile = ({ doctorData }) => {
                       id="hospital"
                       value={item.hospital}
                       className="form_input"
+                      onChange={(e) => handleExperienceChange(e, index)}
                     />
                   </div>
                 </div>

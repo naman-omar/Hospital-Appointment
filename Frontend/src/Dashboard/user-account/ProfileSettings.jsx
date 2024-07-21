@@ -107,7 +107,7 @@ const ProfileSettings = ({ user }) => {
               readOnly
             />
           </div>
-          <div className="mb-5">
+          {/* <div className="mb-5">
             <input
               type="password"
               placeholder="Enter Password"
@@ -116,7 +116,7 @@ const ProfileSettings = ({ user }) => {
               onChange={handleInputData}
               className="w-full px-4 py-3 border-b border-solid border-[#00000070]  focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor cursor-pointer"
             />
-          </div>
+          </div> */}
           <div className="mb-5">
             <input
               type="text"
@@ -129,7 +129,7 @@ const ProfileSettings = ({ user }) => {
           </div>
           <div className="mb-5 flex gap-4 ">
             {formData.photo && (
-              <figure className="w-[50px] h-[50px] rounded-full flex items-center justify-center">
+              <figure className="w-[50px] h-[50px] rounded-full flex items-center justify-center overflow-hidden">
                 <img
                   src={formData.photo}
                   alt="patient"
@@ -148,9 +148,9 @@ const ProfileSettings = ({ user }) => {
               />
               <label
                 htmlFor="customFile"
-                className="absolute top-0 left-0 w-full h-full flex items-center justify-center px-[0.75rem] py-[0.375rem] text-[15px] leading-6 overflow-hodden bg-[#0066ff46] text-headingColor font-[600] rounded-lg cursor-pointer"
+                className="absolute top-0 left-0 w-full h-full flex items-center justify-center px-[0.75rem] py-[0.375rem] text-[15px] leading-6 overflow-hidden bg-[#0066ff46] text-headingColor font-[600] rounded-lg cursor-pointer"
               >
-                {selectedFile ? selectedFile.name : "Upload Photo"}
+              Upload Photo
               </label>
             </div>
           </div>

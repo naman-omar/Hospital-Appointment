@@ -45,8 +45,11 @@ const DoctorAbout = ({ name, about, qualifications, experiences }) => {
         <h3 className="text-[20px] leading-[30px] text-headingColor font-[600]">
           Experience
         </h3>
-        {experiences && experiences.length > 0 && (
-          <ul className="pt-4 md:p-5">
+        <div className="grid md: grid-cols-2 gap-[1rem]">
+
+        </div>
+        {experiences?.length > 0 && (
+          <ul className=" grid md:grid-cols-2 pt-4 md:p-5 gap-4">
             {experiences.map((item, index) => (
               <li key={index} className="p-4 rounded bg-[#fff9ea]">
                 <span className="text-yellowColor text-[15px] leading-6 font-[600]">
