@@ -9,18 +9,26 @@ const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
     try{
       const res = await fetch(`${BASE_URL}/bookings/checkout-session/${doctorId}`, {
         method: "post",
-        header: {
-          Authorization: `Bearer ${token}`
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
         }
       })
 
-      const data = await res.json()
+      console.log('Response status:', res.status);
 
-      if(!res.ok){
-         throw new Error(data.message + 'Please try again')
+      if (!res.ok) {
+        if (res.headers.get('content-type')?.includes('application/json')) {
+          const errorData = await res.json();
+          throw new Error(errorData.message + ' Please try again');
+        } else {
+          throw new Error('An unexpected error occurred. Please try again');
+        }
       }
 
-      if(data.session.url){
+      const data = await res.json(); // Read response body once for the success case
+
+      if(data.session && data.session.url){
         window.location.href = data.session.url
       }
     }catch(err){

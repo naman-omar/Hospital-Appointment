@@ -7,6 +7,8 @@ export const getCheckOutSession = async (req,res) => {
     try{
 
         //Get currently booked user
+        // console.log("DoctorId",req.params.doctorId);
+        // console.log("UserId",req.userId);
         const doctor = await Doctor.findById(req.params.doctorId)
         const user = await User.findById(req.userId);
 
@@ -23,7 +25,7 @@ export const getCheckOutSession = async (req,res) => {
             line_items: [
                 {
                     price_data: {
-                        currency: 'INR',
+                        currency: 'inr',
                         unit_amount: doctor.ticketPrice * 100,
                         product_data: {
                             name: doctor.name,

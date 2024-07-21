@@ -4,12 +4,11 @@ import { FcApproval } from "react-icons/fc";
 
 const CheckoutSuccess = () => {
     return (
-        <div className='bg-grey-100 h-screen'>
+        <div className=' flex items-center bg-grey-100 md:h-[350px]'>
             <div className='bg-white p-6 md: mx-auto'>
-                <div><FcApproval/></div>
                 <div className='text-center'>
-                    <h3 className='md:text-2xl text-base text-grey-900 font-[600] text-center'>
-                        Payment Done!
+                    <h3 className='text-2xl text-grey-900 font-[600] text-center'>
+                        <span className='flex justify-center mb-4'><FcApproval size={50}/></span>Payment Done!
                     </h3>
                     <p className='text-grey-600 my-2'>
                         Thankyou for completing your secure online payment.

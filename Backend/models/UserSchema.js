@@ -13,7 +13,7 @@ const UserSchema = new mongoose.Schema({
   },
   gender: { type: String, enum: ["male", "female", "other"] },
   bloodGroup: { type: String },
-  appointments: [{ type: mongoose.Types.ObjectId, ref: "Appointment" }],
+  appointments: [{ type: mongoose.Types.ObjectId, ref: "Booking" }],
 });
 
 export default mongoose.model("User", UserSchema);
