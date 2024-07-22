@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useEffect, useRef, useContext } from "react";
+import { useRef, useContext } from "react";
 import userImg from "../../assets/images/defaultUser.jpg";
 import logo from "../../assets/images/logo.png";
 import { NavLink, Link } from "react-router-dom";
@@ -27,25 +27,8 @@ const navLinks = [
 
 const Header = () => {
   let [menuStatus, setMenuStatus] = useState(false);
-  const headerRef = useRef(null);
   const menuRef = useRef(null);
   const { user, role, token } = useContext(authContext);
-
-  // const handleStickyHeader = () => {
-  //     window.addEventListener("scroll", () => {
-  //         if(document.body.scrollTop > 80 || document.documentElement.scrollTop > 80){
-  //             headerRef.current.classList.add("sticky_header");
-  //         }
-  //         else{
-  //             headerRef.current.classList.remove("sticky_header");
-  //         }
-  //     });
-  // };
-
-  // useEffect(() => {
-  //     handleStickyHeader()
-  //     return () => window.removeEventListener('scroll',handleStickyHeader)
-  // });
 
   const toggleMenu = () => {
     setMenuStatus(!menuStatus);
@@ -53,7 +36,7 @@ const Header = () => {
   };
 
   return (
-    <header className="header flex items-center" ref={headerRef}>
+    <header className="header flex items-center">
       <div className="container">
         <div className="flex justify-between items-center">
           <div>

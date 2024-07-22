@@ -65,12 +65,12 @@ const Footer = () => {
   return (
     <footer className="pb-16 pt-10 mt-8">
       <div className="container">
-        <div className="flex justify-between flex-col sm:flex-row flex-wrap gap-8">
+        <div className="flex justify-between flex-col sm:flex-row gap-8">
           <div>
             <img src={Logo} alt="logo" />
             <p className="text-[16px] text-textColor font-[400] leading-7 mt-2">
-              Copyright &copy; {year} developed by Naman{" "}
-              <span className="block lg:inline-block">all rights reserved</span>{" "}
+              Copyright &copy; {year} developed by Naman {" "}
+              <span className="block lg:inline-block">all rights reserved</span>
             </p>
             <div className="flex items-center gap-3 mt-4">
               {socialLinks.map((link, idx) => {
@@ -86,7 +86,7 @@ const Footer = () => {
               })}
             </div>
           </div>
-          <div className="grid grid-cols-2 xl:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="flex flex-col items-start gap-4 text-[14px] font-[400] text-textColor">
               <h2 className="text-[18px] leading-[30px] font-[700] mb-4 text-headingColor">
                 Quick Links

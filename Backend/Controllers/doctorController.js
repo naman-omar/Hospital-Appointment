@@ -22,10 +22,16 @@ export const updateDoctor = async (req, res) => {
 };
 
 export const deleteDoctor = async (req, res) => {
-  const id = req.params.id;
+  const id = req.userId;
   try {
+    // Delete doctor's bookings first
+    await Booking.deleteMany({ doctor: id });
+
+    //delete doctor's review
+    await Review.deleteMany({doctor: id});
+
     const deletedDoctor = await Doctor.findByIdAndDelete(id);
-    res.status(200).json({ success: true, message: "Successfully Deleted" });
+    res.status(200).json({ success: true, message: "Successfully Deleted", data: deletedDoctor});
   } catch (err) {
     res.status(500).json({ success: false, message: "Failed to delete" });
   }
@@ -88,33 +94,26 @@ export const getDoctorProfile = async (req, res) => {
         .status(404)
         .json({ success: false, message: "Doctor not found" });
     }
-    const { password, ...rest } = doctor._doc;
+    const { password, ...doctorData } = doctor._doc;
     const appointments = await Booking.find({ doctor: doctorId });
+
+    const responseData = {
+      ...doctorData,
+      appointments: appointments
+    };
+
     res
       .status(200)
       .json({
         success: true,
         message: "Getting Profile Info",
-        data: { ...rest },
+        data: responseData,
       });
   } catch (err) {
     // Debugging statement
     res
       .status(500)
       .json({ success: false, message: "Something went wrong, cannot get" });
-  }
-};
-
-export const deleteDoctorAccount = async (req, res) => {
-  console.log("hello")
-  const doctorId = req.userId; 
-  console.log("ID",id);
-
-  try {
-    await Doctor.findByIdAndDelete(doctorId);
-    res.status(200).json({ success: true, message: "Successfully Deleted Account" });
-  } catch (err) {
-    res.status(500).json({ success: false, message: "Failed to delete account" });
   }
 };
 

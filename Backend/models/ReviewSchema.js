@@ -50,9 +50,10 @@ reviewSchema.statics.calcAverageRatings = async function (doctorId) {
   ]);
 
   if (stats.length > 0) {
+    const averageRating = Math.round(stats[0].averageRating * 10) / 10;
     await Doctor.findByIdAndUpdate(doctorId, {
       totalRating: stats[0].numOfRating,
-      averageRating: stats[0].averageRating
+      averageRating: averageRating
     });
   } else {
     await Doctor.findByIdAndUpdate(doctorId, {

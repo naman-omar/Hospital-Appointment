@@ -39,8 +39,8 @@ const Doctors = () => {
               onChange={(e) => {setQuery(e.target.value)}}
             />
             <button onClick={handleSearch} className="btn mt-0 md:w-[30%] flex justify-center items-center sm:w-[20%] rounded-[0px] rounded-r-md py-4">
-              <span className="hidden md:inline-block font-[600]">Search</span>
-              <span className="inline-block md:hidden"><IoSearch/></span>
+              <span className="font-[600]">Search</span>
+              {/* <span className="inline-block md:hidden"><IoSearch/></span> */}
             </button>
           </div>
         </div>

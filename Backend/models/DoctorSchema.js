@@ -21,9 +21,10 @@ const DoctorSchema = new mongoose.Schema({
     type: Array,
   },
 
-  bio: { type: String, maxLength: 50 },
+  bio: { type: String, maxLength: 200 },
   about: { type: String },
   timeSlots: { type: Array },
+  gender: {type: String, enum: ["male", "female", "other"]},
   reviews: [{ type: mongoose.Types.ObjectId, ref: "Review" }],
   averageRating: {
     type: Number,

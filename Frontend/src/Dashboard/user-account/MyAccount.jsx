@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import MyBookings from "./MyBookings.jsx";
 import ProfileSettings from "./ProfileSettings.jsx";
 import useGetProfile from "../../hooks/useFetchData.js";
-import { BASE_URL } from "../../config.js";
+import { BASE_URL, token} from "../../config.js";
 import Loading from "../../components/Loader/Loading.jsx";
 import Error from "../../components/Error/Error.jsx";
 import user from "../../assets/images/defaultUser.jpg";
@@ -30,29 +30,38 @@ const UserAccount = () => {
     toast.success("You have successfully logged out");
   };
 
-  // const handleDeleteAccount = async () => {
-  //     try {
-  //         const response = await fetch(`${BASE_URL}/users/profile/delete`, {
-  //             method: 'DELETE',
-  //             headers: {
-  //                 'Content-Type': 'application/json',
-  //             },
-  //             body: JSON.stringify({ userId: userData._id }),
-  //         });
-
-  //         const result = await response.json();
-
-  //         if (response.ok) {
-  //             dispatch({ type: "LOGOUT" });
-  //             navigate("/home");
-  //             toast.success('Your account has been deleted successfully');
-  //         } else {
-  //             toast.error(result.message || 'Failed to delete account');
-  //         }
-  //     } catch (error) {
-  //         toast.error('An error occurred while deleting your account');
-  //     }
-  // };
+  const handleDeleteAccount = async () => {
+    // Show a confirmation dialog
+    const confirmed = window.confirm("Are you sure you want to delete your account?");
+  
+    if (confirmed) {
+      try {
+        const res = await fetch(`${BASE_URL}/users/deleteUserAccount`, {
+          method: "DELETE",
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        });
+  
+        const result = await res.json();
+        console.log("Data", result);
+  
+        if (!res.ok) {
+          throw new Error(result.message);
+        }
+  
+        dispatch({ type: "LOGOUT" });
+        navigate("/home");
+        toast.success("Your account has been successfully deleted");
+      } catch (err) {
+        toast.error(err.message);
+      }
+    } else {
+      // Optionally handle the case where the user canceled the delete action
+      toast.info("Account deletion canceled");
+    }
+  };
 
   return (
     <section>
@@ -92,7 +101,7 @@ const UserAccount = () => {
                 >
                   Logout
                 </button>
-                <button className="min-w-[80%] bg-red-600 p-3 text-[16px] text-white leading-7 rounded-md">
+                <button onClick={handleDeleteAccount} className="min-w-[80%] bg-red-600 p-3 text-[16px] text-white leading-7 rounded-md">
                   Delete Account
                 </button>
               </div>

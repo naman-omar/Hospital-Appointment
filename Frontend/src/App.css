@@ -72,3 +72,11 @@ body{
     color: #fff !important;
   }
 }
+
+.options{
+  display: none;
+}
+
+.show_options{
+  display: block;
+}

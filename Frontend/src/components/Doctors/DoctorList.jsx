@@ -9,7 +9,7 @@ const DoctorList = () => {
   const {data: doctors, loading, error} = useFetchData(`${BASE_URL}/doctors`)
   return (
     <div>
-        {error && <Error/>}
+        {error && <Error errMsg={error}/>}
         {loading && <Loader/>}
         {!error && !loading && (
             <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-8 mt-[30px]">

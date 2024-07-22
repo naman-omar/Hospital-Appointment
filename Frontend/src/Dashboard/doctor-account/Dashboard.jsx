@@ -20,7 +20,7 @@ const Dashboard = () => {
     <section className="pt-[45px]">
       <div className="max-w-[1170px] px-5 mx-auto">
         {loading && !error && <Loader />}
-        {error && !loading && <Error />}
+        {error && !loading && <Error errMsg={error}/>}
         {!loading && !error && (
           <div className="grid lg:grid-cols-3 gap-[50px] lg:gap-[100px] ">
             <Tabs tab={tab} setTab={setTab} />

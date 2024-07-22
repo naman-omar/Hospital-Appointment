@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { createContext, useEffect, useReducer } from "react";
 
 const getInitialState = () => {
@@ -23,14 +24,6 @@ const getInitialState = () => {
 };
 
 const initialState = getInitialState();
-
-// const initialState = {
-//   user: localStorage.getItem("user")
-//     ? JSON.parse(localStorage.getItem("user"))
-//     : null,
-//   role: localStorage.getItem("role") || null,
-//   token: localStorage.getItem("token") || null,
-// };
 
 export const authContext = createContext(initialState);
 

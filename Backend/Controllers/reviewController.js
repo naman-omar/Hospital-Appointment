@@ -18,8 +18,8 @@ export const createReview = async (req, res) => {
   if (!req.body.doctor) req.body.doctor = req.params.doctorId;
   if (!req.body.user) req.body.user = req.userId;
 
-  console.log("Doctor",req.body.doctor);
-  console.log("Review", req.body.user);
+  // console.log("Doctor",req.body.doctor);
+  // console.log("Review", req.body.user);
 
   const newReview = new Review(req.body);
   try {

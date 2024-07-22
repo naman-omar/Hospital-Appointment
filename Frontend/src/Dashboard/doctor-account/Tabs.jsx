@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import { useContext } from "react";
-import { BiMenu } from "react-icons/bi";
+import { useContext, useState, useRef } from "react";
+import { BiMenu, BiX } from "react-icons/bi";
 import { authContext } from "../../context/AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -17,36 +17,53 @@ const Tabs = ({ tab, setTab }) => {
   };
 
   const handleDeleteAccount = async () => {
-    try {
-      const res = await fetch(`${BASE_URL}/doctors/deleteAccount`, {
-        method: "DELETE",
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
+    // Show a confirmation dialog
+    const confirmed = window.confirm("Are you sure you want to delete your account?");
+  
+    if (confirmed) {
+      try {
+        const res = await fetch(`${BASE_URL}/doctors/deleteAccount`, {
+          method: "DELETE",
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        });
+  
+        const result = await res.json();
+        console.log("Data", result);
+  
+        if (!res.ok) {
+          throw new Error(result.message);
         }
-      });
-
-      const result = await res.json();
-      console.log("Data", result);
-
-      if (!res.ok) {
-        throw new Error(result.message);
+  
+        dispatch({ type: "LOGOUT" });
+        navigate("/home");
+        toast.success("Your account has been successfully deleted");
+      } catch (err) {
+        toast.error(err.message);
       }
-
-      dispatch({ type: "LOGOUT" });
-      navigate("/home");
-      toast.success("Your account has been successfully deleted");
-    } catch (err) {
-      toast.error(err.message);
+    } else {
+      // Optionally handle the case where the user canceled the delete action
+      toast.info("Account deletion canceled");
     }
   };
+  
+  const [menu, setmenu] = useState(false);
+
+  const newRef = useRef(null);
+
+  const toggle = () => {
+    setmenu(!menu);
+    newRef.current.classList.toggle("show_options");
+  }
 
   return (
     <div>
       <span className="lg:hidden">
-        <BiMenu className="w-6 h-6 cursor-pointer" />
+        {!menu ? <BiMenu onClick={toggle} className="w-6 h-6 cursor-pointer" /> : <BiX onClick={toggle} className="w-6 h-6 cursor-pointer" /> }
       </span>
-      <div className="hidden lg:flex flex-col p-[30px] bg-white shadow-panelShadow items-center h-max rounded-md">
+      <div className="options max-w-[500px] lg:flex flex-col p-[30px] bg-white shadow-panelShadow items-center h-max rounded-md" ref={newRef}>
         <button
           onClick={() => setTab("overview")}
           className={`${

@@ -1,6 +1,7 @@
 import User from "../models/UserSchema.js";
 import Booking from "../models/BookingSchema.js";
 import Doctor from "../models/DoctorSchema.js";
+import Review from "../models/ReviewSchema.js";
 
 export const updateUser = async (req, res) => {
   const id = req.params.id;
@@ -19,16 +20,6 @@ export const updateUser = async (req, res) => {
       });
   } catch (err) {
     res.status(500).json({ success: false, message: "Failed to update" });
-  }
-};
-
-export const deleteUser = async (req, res) => {
-  const id = req.params.id;
-  try {
-    const deletedUser = await User.findByIdAndDelete(id);
-    res.status(200).json({ success: true, message: "Successfully Deleted" });
-  } catch (err) {
-    res.status(500).json({ success: false, message: "Failed to delete" });
   }
 };
 
@@ -60,7 +51,7 @@ export const getUserProfile = async (req, res) => {
     if (!user) {
       return res
         .status(404)
-        .json({ success: false, message: "User not found" });
+        .json({ success: false, message: "Not authorized" });
     }
     const { password, ...rest } = user._doc;
     res
@@ -83,9 +74,7 @@ export const getMyAppointments = async (req, res) => {
     const bookings = await Booking.find({ user: req.userId });
 
     //step2: extract doctor ids from appoitnment bookings
-    const doctorIds = bookings.map((el) => {
-      el.doctor.id;
-    });
+    const doctorIds = bookings.map((el) => el.doctor);
 
     //step2: retrieve doctor using doctor ids
     const doctors = await Doctor.find({ _id: { $in: doctorIds } }).select(
@@ -102,19 +91,31 @@ export const getMyAppointments = async (req, res) => {
   }
 };
 
-// export const deleteUserAccount = async (req, res) => {
-//     try {
-//         const userId = req.userId;
+export const deleteUserAccount = async (req, res) => {
+    const userId = req.userId;
+    try {
 
-//         // Delete user's bookings first
-//         await Booking.deleteMany({ user: userId });
+        // Delete user's bookings first
+        await Booking.deleteMany({ user: userId });
 
-//         // Then delete the user
-//         await User.findByIdAndDelete(userId);
+         // Find all unique doctor IDs associated with the deleted reviews
+        const doctors = await Review.distinct("doctor", { user: userId });
 
-//         res.status(200).json({ success: true, message: "User account deleted successfully" });
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).json({ success: false, message: "Something went wrong, cannot delete account" });
-//     }
-// };
+        //delete user's review
+        await Review.deleteMany({user: userId});
+    
+        // Recalculate average ratings for each doctor
+        for (const doctorId of doctors) {
+          await Review.calcAverageRatings(doctorId);
+        }        
+
+        // Then delete the user
+        const deletedUser = await User.findByIdAndDelete(userId);
+
+        res.status(200).json({ success: true, message: "User account deleted successfully", data: deletedUser });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, message: "Something went wrong, cannot delete account" });
+    }
+};
