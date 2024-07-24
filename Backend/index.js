@@ -45,7 +45,6 @@ app.use("/users", userRoute);
 app.use("/doctors", doctorRoute);
 app.use("/reviews", reviewRoute);
 app.use("/bookings", bookingRoute);
-app.use('/webhook', bookingRoute);
 app.use('/api', webhookRoutes);
 
 app.listen(port, () => {
