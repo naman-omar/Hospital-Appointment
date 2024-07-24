@@ -8,6 +8,7 @@ import userRoute from "./Routes/user.js";
 import doctorRoute from "./Routes/doctor.js";
 import reviewRoute from "./Routes/review.js";
 import bookingRoute from "./Routes/booking.js";
+import webhookRoutes from "./Routes/webhook.js"
 
 dotenv.config();
 
@@ -44,6 +45,8 @@ app.use("/users", userRoute);
 app.use("/doctors", doctorRoute);
 app.use("/reviews", reviewRoute);
 app.use("/bookings", bookingRoute);
+app.use('/webhook', bookingRoute);
+app.use('/api', webhookRoutes);
 
 app.listen(port, () => {
   connectDB();

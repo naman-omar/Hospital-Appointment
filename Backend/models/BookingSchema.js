@@ -22,6 +22,10 @@ const bookingSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    session: {
+      type: String,  // Store Stripe Checkout session ID
+      required: false, 
+    },
   },
   { timestamps: true }
 );
