@@ -26,7 +26,7 @@ const Routers = () => {
       <Route path="/contact" element={<Contact />}></Route>
       <Route path="/doctors" element={<Doctors />}></Route>
       <Route path="/doctors/:id" element={<DoctorDetails />}></Route>
-      <Route path="/checkout-success" element={<CheckoutSuccess/>}></Route>
+      <Route path="/verify" element={<CheckoutSuccess/>}></Route>
       <Route
         path="/users/profile/me"
         element={

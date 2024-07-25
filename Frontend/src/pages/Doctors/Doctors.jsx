@@ -33,13 +33,13 @@ const Doctors = () => {
           <div className="max-w-[570px] mt-[30px] mx-auto bg-[#97aac82c] rounded-md flex items-center justify-between">
             <input
               type="search"
-              className="py-4 pl-4 sm:pr-2 bg-transparent w-[70%] sm:w-[80%] focus:outline-none cursor-pointer placeholder:text-textColor sm:placeholder:text-[16px] pr-[0] placeholder:text-[13px]"
+              className="py-4 pl-4 sm:pr-2 bg-transparent w-[70%] sm:w-[80%] focus:outline-none cursor-pointer placeholder:text-textColor sm:placeholder:text-[16px] pr-[0] placeholder:text-[11px]"
               placeholder="Search Doctor by name or specification"
               value = {query}
               onChange={(e) => {setQuery(e.target.value)}}
             />
             <button onClick={handleSearch} className="btn mt-0 md:w-[30%] flex justify-center items-center sm:w-[20%] rounded-[0px] rounded-r-md py-4">
-              <span className="font-[600]">Search</span>
+              <span className="font-[600] text-[12px] sm:text-[16px]">Search</span>
               {/* <span className="inline-block md:hidden"><IoSearch/></span> */}
             </button>
           </div>

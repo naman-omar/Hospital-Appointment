@@ -27,9 +27,8 @@ const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
       }
 
       const data = await res.json(); // Read response body once for the success case
-
-      if(data.session && data.session.url){
-        window.location.href = data.session.url
+      if(data.session_url){
+        window.location.href = data.session_url
       }
     }catch(err){
       toast.error(err.message)
@@ -37,8 +36,9 @@ const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
   }
 
   return (
-    <div className="shadow-panelShadow p-6 lg:p-10 rounded-md h-[22rem] lg:h-[24rem]">
-      <div className="flex items-center justify-between">
+    <div className="flex items-center justify-center shadow-panelShadow rounded-md h-[24rem] lg:h-[24rem]">
+      <div>
+      <div className="flex items-center  gap-6">
         <p className="text_para mt-0 font-[700] text-headingColor">
           Consultation Fee
         </p>
@@ -63,6 +63,7 @@ const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
       </div>
       <button onClick={bookingHandler} className="btn px-2 w-full rounded-md mt-4">Book Appointment</button>
     </div>
+  </div>
   );
 };
 

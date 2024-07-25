@@ -57,6 +57,8 @@ const Login = () => {
       setLoading(false);
       toast.success(resData.message || "Registration successful");
       navigate("/home");
+      window.location.reload();
+      
     } catch (err) {
       //console.error('Error:', err); // Debugging log
       toast.error(err.message || "Something went wrong");

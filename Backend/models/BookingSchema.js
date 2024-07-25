@@ -20,7 +20,7 @@ const bookingSchema = new mongoose.Schema(
     },
     isPaid: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     session: {
       type: String,  // Store Stripe Checkout session ID

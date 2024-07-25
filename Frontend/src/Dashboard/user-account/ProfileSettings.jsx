@@ -80,7 +80,7 @@ const ProfileSettings = ({ user }) => {
   };
 
   return (
-    <div>
+    <div className="mt-6">
       {loading && <Loading />}
       {!loading && (
         <form onSubmit={handleFormSubmit} className="mt-4">

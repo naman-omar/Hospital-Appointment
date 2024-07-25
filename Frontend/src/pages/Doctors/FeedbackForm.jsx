@@ -33,13 +33,16 @@ const FeedbackForm = () => {
       });
 
       const result = await res.json();
-      console.log("data",result);
 
       if (!res.ok) {
         throw new Error(result.message);
       }
 
       setLoading(false);
+      setTimeout(() => {
+        window.location.reload();
+    }, 2000);
+    
       toast.success(result.message);
       
     } catch (err) {
