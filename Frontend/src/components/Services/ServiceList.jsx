@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 
 import { services } from "../../assets/data/services";
 import ServiceCard from "./ServiceCard";

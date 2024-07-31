@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
-const FaqItem = ({ item, key}) => {
+const FaqItem = ({item, key}) => {
   const [isOpen, setIsOpen] = useState(false);
   const toogleOpen = () => {
     if (!isOpen) setIsOpen(true);
@@ -37,3 +37,5 @@ const FaqItem = ({ item, key}) => {
 };
 
 export default FaqItem;
+
+

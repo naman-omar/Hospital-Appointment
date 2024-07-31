@@ -5,7 +5,6 @@ import Testimonials from "../../components/Testimonials/Testimonials";
 import Error from "../../components/Error/Error.jsx";
 import Loader from "../../components/Loader/Loading.jsx";
 import { useEffect, useState } from "react";
-import { IoSearch } from "react-icons/io5";
 
 const Doctors = () => {
   const [query,setQuery] = useState('')
@@ -47,8 +46,8 @@ const Doctors = () => {
       </section>
       <section className="pt-[30px]">
         <div className="container">
-          {loading && <Loader/>}
-          {error && <Error/>}
+          {loading && !error && <Loader/>}
+          {error && !loading && <Error/>}
           {!error && !loading && (<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  xl:grid-cols-4 gap-8 mt-[30px] lg:mt-[55px]">
             {(doctors.length > 0) ? ( // Check if there are any doctors to display
                 doctors.map((doctor) => (

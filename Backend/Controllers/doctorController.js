@@ -113,7 +113,7 @@ export const getDoctorProfile = async (req, res) => {
     // Debugging statement
     res
       .status(500)
-      .json({ success: false, message: "Something went wrong, cannot get" });
+      .json({ success: false, message: "Something went wrong" });
   }
 };
 

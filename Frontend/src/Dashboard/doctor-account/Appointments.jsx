@@ -8,21 +8,21 @@ const Appointments = ({ appointments }) => {
     return (
         <>
             <div className="hidden sm:block overflow-x-auto">
-                <table className="min-w-full text-left text-sm text-gray-500">
-                    <thead className="opacity-0 absolute sm:opacity-100 sm:relative text-sm text-gray-700 uppercase bg-gray-100">
+                <table className="w-full text-left text-sm text-gray-500">
+                    <thead className="text-sm text-gray-700 uppercase bg-gray-100">
                         <tr>
-                            <th scope="col" className="sm:px-6 sm:py-3">Name</th>
-                            <th scope="col" className="sm:px-6 sm:py-3">Gender</th>
-                            <th scope="col" className="sm:px-6 sm:py-3">Payment</th>
-                            <th scope="col" className="sm:px-6 sm:py-3">Price</th>
-                            <th scope="col" className="sm:px-6 sm:py-3">Booked on</th>
+                            <th className="sm:px-6 sm:py-3">Name</th>
+                            <th className="sm:px-6 sm:py-3">Gender</th>
+                            <th className="sm:px-6 sm:py-3">Payment</th>
+                            <th className="sm:px-6 sm:py-3">Price</th>
+                            <th className="sm:px-6 sm:py-3">Booked on</th>
                         </tr>
                     </thead>
                     <tbody>
                         {paidAppointments.length > 0 ? (
                             paidAppointments.map(item => (
                                 <tr key={item._id} className="border-b">
-                                    <th scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap">
+                                    <th className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap">
                                         <img src={item.user.photo} alt="photo" className="w-10 h-10 rounded-full"/>
                                         <div className="pl-3">
                                             <div className="text-base font-[600]">{item.user.name}</div>
@@ -66,12 +66,9 @@ const Appointments = ({ appointments }) => {
                                 </div>
                             </div>
                             <div className="text-sm mb-2"><strong>Gender:</strong> {item.user.gender}</div>
-                            <div className="text-sm mb-2">
-                                <strong>Payment:</strong>
-                                <div className="flex items-center gap-2">
-                                    <div className="mt-1">{item.isPaid ? 'Paid' : 'Unpaid'}</div>
-                                    <div className={`h-2.5 w-2.5 mt-1 rounded-full ${item.isPaid ? 'bg-green-500' : 'bg-red-500'}`}></div>
-                                </div>
+                            <div className="flex items-center gap-2 text-sm mb-2">
+                                <div className="mt-1"><strong>Status:</strong> {item.isPaid ? 'Paid' : 'Unpaid'}</div>
+                                <div className={`h-2.5 w-2.5 mt-1 rounded-full ${item.isPaid ? 'bg-green-500' : 'bg-red-500'}`}></div>
                             </div>
                             <div className="text-sm mb-2"><strong>Price:</strong> {item.ticketPrice}</div>
                             <div className="text-sm"><strong>Booked on:</strong> {formatDate(item.createdAt)}</div>
