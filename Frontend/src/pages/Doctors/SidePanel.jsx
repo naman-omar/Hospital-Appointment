@@ -20,7 +20,7 @@ const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
       if (!res.ok) {
         if (res.headers.get('content-type')?.includes('application/json')) {
           const errorData = await res.json();
-          throw new Error(errorData.message + ' Please try again');
+          throw new Error(errorData.message);
         } else {
           throw new Error('An unexpected error occurred. Please try again');
         }

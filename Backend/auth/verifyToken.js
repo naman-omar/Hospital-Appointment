@@ -10,7 +10,7 @@ export const authenticate = async (req, res, next) => {
   if (!authToken || !authToken.startsWith("Bearer")) {
     return res
       .status(401)
-      .json({ success: false, message: "No token, authorization denied" });
+      .json({ success: false, message: "Authorization denied" });
   }
 
   try {
@@ -26,7 +26,7 @@ export const authenticate = async (req, res, next) => {
     if (err === "TokenExpiredError") {
       return res.status(401).json({ message: "Token is expired" });
     }
-    return res.status(401).json({ success: false, message: "Invalid token" });
+    return res.status(401).json({ success: false, message: "You are not authorized" });
   }
 };
 
