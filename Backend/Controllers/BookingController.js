@@ -62,3 +62,43 @@ export const verifyBooking = async (req,res) => {
         res.status(500).json({success:false, message: err.message})
     }
 }
+
+export const getAllAppointments = async (req, res) => {
+    try {
+      const appointments = await Booking.find({});
+      res.status(200).json({
+        success: true,
+        data: appointments,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: error.message,
+      });
+    }
+};
+
+export const updateStatus = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { status } = req.body;
+  
+      // Validate status value
+      if (!['pending', 'approved', 'cancelled'].includes(status)) {
+        return res.status(400).json({ message: 'Invalid status value' });
+      }
+  
+      // Find and update appointment
+      const appointment = await Booking.findByIdAndUpdate(id, { status }, { new: true });
+  
+      if (!appointment) {
+        return res.status(404).json({ message: 'Appointment not found' });
+      }
+  
+      res.status(200).json(appointment);
+    } catch (error) {
+      console.error('Error updating status:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  };
+  

@@ -26,6 +26,7 @@ export const register = async (req, res) => {
     //check if user exist
     if (user) {
       res.status(400).json({ message: "User already exists" });
+      return;
     }
 
     //hash password
@@ -110,5 +111,81 @@ export const login = async (req, res) => {
       });
   } catch (err) {
     res.status(500).json({ success: false, message: "Login failed" });
+  }
+};
+
+export const loginAdmin = async (req, res) => {
+  const { email } = req.body;
+  try {
+    let user = null;
+    const patient = await User.findOne({ email });
+    const doctor = await Doctor.findOne({ email });
+
+    if (patient) {
+      user = patient;
+    } else if (doctor) {
+      user = doctor;
+    }
+
+    // Check if user exists or not
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Compare password
+    const isPasswordMatch = await bcrypt.compare(req.body.password, user.password);
+
+    if (!isPasswordMatch) {
+      return res.status(400).json({ status: false, message: "Invalid Credentials" });
+    }
+
+    // Check if the user's role is 'admin'
+    if (user.role !== "admin") {
+      return res.status(403).json({ status: false, message: "Unauthorized access. Admins only." });
+    }
+
+    // Generate token
+    const token = genToken(user);
+
+    const { password, role, appointments, ...rest } = user._doc;
+    res.status(200).json({
+      success: true,
+      message: "Successfully Logged In as Admin",
+      token,
+      data: { ...rest },
+      role,
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Admin login failed" });
+  }
+};
+
+export const addAdmin = async (req, res) => {
+  const { email, name } = req.body;
+
+  try {
+    let user = null;
+    const patient = await User.findOne({ email, name });
+    const doctor = await Doctor.findOne({ email, name });
+
+    if (patient) {
+      user = patient;
+    } else if (doctor) {
+      user = doctor;
+    }
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if(user.role === "admin"){
+      return res.status(200).json({ success: true, message: "Already a admin" });
+    }
+    user.role = "admin";
+    await user.save();
+    return res.status(200).json({ success: true, message: "User role updated to admin", data: user });
+    
+  } catch (error) {
+    return res.status(500).json({ success: false, message: "Server error" });
   }
 };

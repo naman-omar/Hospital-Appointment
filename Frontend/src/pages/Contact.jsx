@@ -1,22 +1,45 @@
 import { toast } from "react-toastify";
+import { BASE_URL } from "../config";
 
 const Contact = () => {
 
-  const handleButtonSubmit = (event) => {
-    event.preventDefault(); 
-
-    const email = document.getElementById("email").value.trim();
-    const subject = document.getElementById("subject").value.trim();
-    const message = document.getElementById("message").value.trim();
-
-    if (!email || !subject || !message) {
-      toast.error("Please fill out all the fields."); 
+  const handleButtonSubmit = async (event) => {
+    event.preventDefault();
+  
+    const name = document.getElementById('name').value.trim();  
+    const email = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+    const message = document.getElementById('message').value.trim();
+  
+    if (!name || !email || !subject || !message) {  
+      toast.error('Please fill out all the fields.');
       return;
     }
-
-    toast.success("Message sent successfully");
-    
+  
+    try {
+      const response = await fetch(`${BASE_URL}/messages`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, subject, message }),  
+      });
+  
+      if (response.ok) {
+        toast.success('Message sent successfully');
+        document.getElementById('name').value = '';  
+        document.getElementById('email').value = '';
+        document.getElementById('subject').value = '';
+        document.getElementById('message').value = '';
+      } else {
+        const data = await response.json();
+        toast.error(data.message || 'Failed to send message');
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
+  
 
   return (
     <section className="pt-[30px] sm:pt-[45px]">
@@ -29,6 +52,18 @@ const Contact = () => {
           us know.
         </p>
         <form onSubmit={handleButtonSubmit}>
+          <div className="mb-5">
+            <label htmlFor="name" className="form_label">
+              Your name
+            </label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Enter your name"
+              className="form_input mt-1"
+              required
+            />
+          </div>
           <div className="mb-5">
             <label htmlFor="email" className="form_label">
               Your Email

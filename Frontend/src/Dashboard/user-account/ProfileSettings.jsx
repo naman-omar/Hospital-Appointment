@@ -16,7 +16,7 @@ const ProfileSettings = ({ user }) => {
     password: "",
     photo: null,
     gender: "",
-    role: "patient",
+    role: "",
     bloodGroup: "",
   });
 

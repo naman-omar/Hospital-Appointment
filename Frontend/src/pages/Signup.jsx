@@ -31,7 +31,7 @@ const Signup = () => {
   const handleFileInputChange = async (event) => {
     const file = event.target.files[0];
     const data = await uploadImageToCloudinary(file);
-    console.log(data); //debugging
+    //console.log(data); //debugging
     setPreviewUrl(data.url);
     setSelectedFile(data.url);
     setFormData((prevState) => ({ ...prevState, photo: data.url }));
@@ -40,7 +40,7 @@ const Signup = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-    console.log("Form data:", formData); // Debugging log
+    //console.log("Form data:", formData); // Debugging log
 
     try {
       const res = await fetch(`${BASE_URL}/auth/register`, {

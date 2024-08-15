@@ -51,6 +51,20 @@ export const getSingleDoctor = async (req, res) => {
   }
 };
 
+export const getAll = async (req, res) => {
+  try {
+    const doctors = await Doctor.find({}).select("-password");
+
+    if (!doctors.length) {
+      return res.status(200).json({ success: true, message: "No doctors found" });
+    }
+
+    res.status(200).json({ success: true, message: "Doctors found", data: doctors });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Server error", error: err.message });
+  }
+};
+
 // Controller function to get all doctors
 export const getAllDoctors = async (req, res) => {
   try {
@@ -117,3 +131,23 @@ export const getDoctorProfile = async (req, res) => {
   }
 };
 
+export const updateDoctorStatus = async (req, res) => {
+  try {
+    const { doctorId } = req.params;
+    const { isApproved } = req.body;
+
+    const updatedDoctor = await Doctor.findByIdAndUpdate(
+      doctorId,
+      { isApproved },
+      { new: true } 
+    ).select("-password");
+
+    if (!updatedDoctor) {
+      return res.status(404).json({ success: false, message: "Doctor not found" });
+    }
+
+    res.status(200).json({ success: true, message: "Doctor status updated", data: updatedDoctor });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Server error", error: err.message });
+  }
+};
