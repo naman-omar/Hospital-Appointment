@@ -1,4 +1,4 @@
-import Message from "../models/MessageSchema.js"; 
+import Message from "../models/messageSchema.js"; 
 
 export const getAllMessages = async (req, res) => {
   try {

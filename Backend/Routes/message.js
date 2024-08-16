@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllMessages, newMessage } from "../Controllers/messageControllers.js";
+import { getAllMessages, newMessage } from "../Controllers/messageController.js";
 const router = express.Router();
 
 router.get("/getAll", getAllMessages);
