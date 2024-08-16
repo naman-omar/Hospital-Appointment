@@ -1,6 +1,5 @@
 
 import { useNavigate } from "react-router-dom";
-import {HashLoader} from "react-spinners";
 import { toast } from "react-toastify";
 import { useContext, useState } from "react";
 import logo from "../assets/images/logo.png";
@@ -57,7 +56,7 @@ const Login = () => {
       console.log(resData, "login data");
 
       setLoading(false);
-      toast.success(resData.message || "Registration successful");
+      toast.success(resData.message);
       navigate("/admin/Dashboard");
       setTimeout(()=>{
         window.location.reload();
@@ -105,7 +104,7 @@ const Login = () => {
                 className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3"
                 disabled={loading && true}
               >
-                {loading ? <HashLoader size={25} color="#fff" /> : "Login"}
+              Login
               </button>
             </div>
           </form>
