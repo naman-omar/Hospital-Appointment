@@ -1,6 +1,6 @@
 
 import { useNavigate } from "react-router-dom";
-import HashLoader from "react-spinners/HashLoader";
+import {HashLoader} from "react-spinners";
 import { toast } from "react-toastify";
 import { useContext, useState } from "react";
 import logo from "../assets/images/logo.png";

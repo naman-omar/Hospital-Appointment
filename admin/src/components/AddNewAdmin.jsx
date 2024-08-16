@@ -2,8 +2,7 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../../../Frontend/src/config.js";
-import HashLoader from "react-spinners/HashLoader";
-import { } from "react";
+import {HashLoader} from "react-spinners";
 import logo from "../assets/images/logo.png";
 import {authContext} from "../context/authContext.jsx";
 
