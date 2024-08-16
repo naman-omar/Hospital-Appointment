@@ -1,4 +1,4 @@
-import HashLoader from "react-spinners/HashLoader";
+import { HashLoader } from 'react-spinners';
 
 const Loading = () => {
   return (
