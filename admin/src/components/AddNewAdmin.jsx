@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../../../Frontend/src/config.js";
+import {HashLoader} from "react-spinners";
 import logo from "../assets/images/logo.png";
 import {authContext} from "../context/authContext.jsx";
 
@@ -89,7 +90,7 @@ const AddNewAdmin = () => {
                   className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3"
                   disabled={loading && true}
                 >
-                  Login
+                  {loading ? <HashLoader size={25} color="#fff" /> : "Login"}
                 </button>
               </div>
             </form>
