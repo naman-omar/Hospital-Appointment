@@ -1,10 +1,9 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../../../Frontend/src/config.js";
 import {HashLoader} from "react-spinners";
 import logo from "../assets/images/logo.png";
-import {authContext} from "../context/authContext.jsx";
 
 const AddNewAdmin = () => {
   const [formData, setFormData] = useState({
@@ -14,8 +13,6 @@ const AddNewAdmin = () => {
 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  const { dispatch } = useContext(authContext);
 
   const handleInputData = async (event) => {
     setFormData((prevState) => ({
@@ -53,23 +50,23 @@ const AddNewAdmin = () => {
   };
 
   return (
-    <div className="bg-[#0067FF]">
+    <div className="bg-[#0067FF] min-h-screen">
       <section className="page">
-          <section className="h-[100vh] px-4 md:pt-[80px] pb-[30px]">
+        <section className="h-full px-4 md:pt-[80px] pb-[30px]">
           <img src={logo} alt="logo" className="m-auto mb-14 text-[40px] w-40 h-15 mt-6 md:mt-0"/>
           <div className="w-full max-w-[570px] mx-auto rounded-lg shadow-xl p-10 bg-[#ffffff]">
             <h3 className="text-headingColor text-[22px] leading-9 font-bold mb-10">
               Add new <span className="text-primaryColor">Admin</span>
             </h3>
             <form onSubmit={handleFormSubmit} className="py-4 md:py-0">
-            <div className="mb-5">
+              <div className="mb-5">
                 <input
                   type="text"
                   placeholder="Enter Username"
                   name="name"
                   value={formData.name}
                   onChange={handleInputData}
-                  className="w-full px-4 py-3 border-b border-solid border-[#00000070]    focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor cursor-pointer"
+                  className="w-full px-4 py-3 border-b border-solid border-[#00000070] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor cursor-pointer"
                   required
                 />
               </div>
@@ -80,7 +77,7 @@ const AddNewAdmin = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputData}
-                  className="w-full px-4 py-3 border-b border-solid border-[#00000070]  focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor cursor-pointer"
+                  className="w-full px-4 py-3 border-b border-solid border-[#00000070] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor cursor-pointer"
                   required
                 />
               </div>
@@ -99,6 +96,6 @@ const AddNewAdmin = () => {
       </section>
     </div>
   );
-};
+} 
 
 export default AddNewAdmin;

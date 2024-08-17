@@ -24,8 +24,8 @@ const Doctors = () => {
   return (
     <div className="bg-[#0067FF]">
         <section className="page doctors">
-          <h1>DOCTORS</h1>
-          <div className="container">
+          <h1 className="text-[#3939d9f2] mb-[30px] text-[2.3rem] mt-4 ">DOCTORS</h1>
+          <div className="md:px-[100px] sm:px-[30px] px-[10px]">
           {loading && !error && <Loader/>}
           {error && !loading && <Error/>}
             {!error && !loading && (<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2  xl:grid-cols-3 gap-8 mt-[30px] lg:mt-[55px]">

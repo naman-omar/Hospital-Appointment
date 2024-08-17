@@ -3,6 +3,7 @@ import { useState } from "react";
 import { BASE_URL } from "../../../Frontend/src/config";
 import { Link } from "react-router-dom";
 import { BsArrowRightCircle } from "react-icons/bs";
+import { toast } from "react-toastify";
 
 const DoctorCard = ({ doctor }) => {
   // Local state to manage the doctor's status
@@ -20,6 +21,8 @@ const DoctorCard = ({ doctor }) => {
 
       if (response.ok) {
         setCurrentStatus(newStatus); // Update local state on successful status change
+        toast.success(`Status updated to ${newStatus}`);
+
       } else {
         console.error("Failed to update status");
       }
@@ -29,7 +32,7 @@ const DoctorCard = ({ doctor }) => {
   };
 
   return (
-    <div className="p-4 rounded-lg">
+    <div className="p-4 rounded-lg mt-0">
       <div>
         <img src={doctor.photo} className="w-full rounded-t-lg" alt="photo" />
       </div>
@@ -67,7 +70,7 @@ const DoctorCard = ({ doctor }) => {
         >
           <option value="pending" className="bg-yellow-200 text-yellow-700">Pending</option>
           <option value="approved" className="bg-green-200 text-green-700">Approved</option>
-          <option value="cancelled" className="bg-red-200 text-red-700">Rejected</option>
+          <option value="rejected" className="bg-red-200 text-red-700">Rejected</option>
         </select>
       </div>
     </div>

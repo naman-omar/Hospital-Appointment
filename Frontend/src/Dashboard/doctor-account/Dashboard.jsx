@@ -37,6 +37,17 @@ const Dashboard = () => {
                   </div>
                 </div>
               )}
+              {data.isApproved === "rejected" && (
+                <div className="flex p-4 mb-4 text-red-500 bg-red-50 rounded-lg">
+                  <span>
+                    <MdError className="text-red-500 size-5" />
+                  </span>
+                  <span className="sr-only">Info</span>
+                  <div className="ml-3 text-sm font-medium">
+                   Your profile get rejected!
+                  </div>
+                </div>
+              )}
               <div className="mt-8">
                 {tab === "overview" && (
                   <div>

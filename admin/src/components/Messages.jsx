@@ -1,4 +1,6 @@
-
+import useFetchData from "../../../Frontend/src/hooks/useFetchData";
+import Loader from "../../../Frontend/src/components/Loader/Loading";
+import Error from "../../../Frontend/src/components/Error/Error";
 import { useContext, useEffect, useState } from "react";
 import { BASE_URL } from "../../../Frontend/src/config";
 import { authContext } from "../context/authContext";
@@ -6,10 +8,18 @@ import { authContext } from "../context/authContext";
 const Messages = () => {
   const [messages, setMessages] = useState([]);
   
+  const { data: messageData, loading, error } = useFetchData(`${BASE_URL}/messages/getall`);
+
+  useEffect(() => {
+    if (messageData) {
+      setMessages(messageData);
+    }
+  }, [messageData]);
+
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/messages/getall`);
+        const response = await fetch(`${BASE_URL}/`);
         if(!response.ok){
           throw Error("Some occur occured");
         }
@@ -31,14 +41,16 @@ const Messages = () => {
 
   return (
     <div className="bg-[#0067FF]">
-        <section className="page messages">
-        <h1>MESSAGES</h1>
-        <div className="banner">
-          {messages && messages.length > 0 ? (
+        <section className="page">
+        <h1 className="text-[#3939d9f2] mb-[30px] text-[2.3rem] mt-4">MESSAGES</h1>
+        <div className="flex flex-col gap-[20px]">
+          {loading && <Loader />}
+          {error && <Error />}
+          {!loading && !error && messages && messages.length > 0 ? (
             messages.map((element) => {
               return (
-                <div className="card" key={element._id}>
-                  <div className="details text-[16px] sm:text-[18px]">
+                <div className="bg-[#fff] rounded-[12px] p-[20px]" key={element._id}>
+                  <div className="text-[16px] sm:text-[18px]">
                     <p>
                     <span className="text-primaryColor">Name:</span> <span><b>{element.name}</b></span>
                     </p>
@@ -56,7 +68,7 @@ const Messages = () => {
               );
             })
           ) : (
-            <h2 className="text-black text-[20px]">No Messages yet!</h2>
+            <h2 className="text-black text-[24px]">No Messages yet!</h2>
           )}
         </div>
     </section>

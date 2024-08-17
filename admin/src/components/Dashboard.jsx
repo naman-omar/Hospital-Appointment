@@ -1,46 +1,46 @@
 import { useEffect, useContext, useState } from "react";
 import { authContext } from "../context/authContext.jsx";
 import { BASE_URL } from "../../../Frontend/src/config.js";
+import { toast } from "react-toastify";
+import useFetchData from "../../../Frontend/src/hooks/useFetchData.js";
+import Error from "../../../Frontend/src/components/Error/Error.jsx";
+import Loader from "../../../Frontend/src/components/Loader/Loading.jsx";
 
 const Dashboard = () => {
-  const { user } = useContext(authContext);
-  const { role } = useContext(authContext);
+  const { user, role } = useContext(authContext);
 
   const [doctor, setDoctor] = useState([]);
   const [appointments, setAppointments] = useState([]);
   const [totalAppointments, setTotalAppointments] = useState(0);
   const [doctorCount, setDoctorCount] = useState(0);
 
-  if (!user || role !== "admin") {
-    return null;
-  }
+  const { data: appointmentsData, loading, error } = useFetchData(`${BASE_URL}/bookings/allAppointments`);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const appointmentsResponse = await fetch(`${BASE_URL}/bookings/allAppointments`);
-        const appointmentsData = await appointmentsResponse.json();
-        if (appointmentsResponse.ok) {
-          setAppointments(appointmentsData.data);
-          setTotalAppointments(appointmentsData.data.length);
-        } else {
-          console.error("Failed to fetch appointments:", appointmentsData.message);
-        }
+    if (appointmentsData) {
+      setAppointments(appointmentsData);
+      setTotalAppointments(appointmentsData.length);
+    }
+  }, [appointmentsData]);
 
-        const doctorsResponse = await fetch(`${BASE_URL}/doctors`);
-        const doctorsData = await doctorsResponse.json();
-        if (doctorsResponse.ok) {
-          setDoctor(doctorsData.data);
-          setDoctorCount(doctorsData.data.length);
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/doctors`);
+        const data = await response.json();
+        if (response.ok) {
+          setDoctor(data.data);
+          setDoctorCount(data.data.length);
         } else {
-          console.error(doctorsData.message);
+          console.error(data.message);
         }
       } catch (error) {
-        console.error(error.message);
+        console.error("Failed to fetch doctors:", error.message);
       }
     };
+
     if (user && role === "admin") {
-      fetchData();
+      fetchDoctors();
     }
   }, [user, role]);
 
@@ -63,6 +63,7 @@ const Dashboard = () => {
               : appointment
           )
         );
+        toast.success(`Status updated to ${newStatus}`);
       } else {
         console.error("Failed to update status:", data.message);
       }
@@ -71,47 +72,55 @@ const Dashboard = () => {
     }
   };
 
+  if (!user || role !== "admin") {
+    return null;
+  }
+
   return (
-    <div className="bg-[#0067FF]">
-      <section className="dashboard page">
-        <div className="banner">
-          <div className="firstBox">
-            <figure className="w-[200px] h-[180px] rounded-sm">
-              <img src={user.photo} alt="docImg" />
+    <div className="md:bg-blue-600 min-h-screen">
+      <section className="page bg-gray-200 md:rounded-tl-[50px] md:rounded-bl-[50px] p-10 min-h-screen">
+        <div className="flex flex-col lg:flex-row gap-5">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center sm:items-center bg-[#b5b5ff] rounded-[20px] p-5 w-[100%] lg:w-[50%]">
+            <figure className="w-60 h-40 rounded-sm">
+              <img src={user.photo} alt="docImg" className="w-full h-full  rounded-md" />
             </figure>
-            <div className="content">
-              <p className="text-lg font-semibold">Hello, {user.name.charAt(0).toUpperCase() + user.name.slice(1)}</p>
-              <p className="text-sm">
+            <div className="content ml-5">
+              <p className="text-[30px] font-semibold text-gray-800">Hello, {user.name.charAt(0).toUpperCase() + user.name.slice(1)}</p>
+              <p className="text-[14px] text-gray-600">
                 Welcome to the Admin Dashboard! Your centralized hub for managing users, content, and system settings efficiently.
               </p>
             </div>
           </div>
-          <div className="secondBox">
-            <p className="text-sm font-medium">Total Appointments</p>
-            <h3 className="text-xl font-bold">{totalAppointments}</h3>
-          </div>
-          <div className="thirdBox">
-            <p className="text-sm font-medium">Registered Doctors</p>
-            <h3 className="text-xl font-bold">{doctorCount}</h3>
+          <div className="flex flex-col sm:flex-row gap-5 w-full lg:w-1/2">
+            <div className="flex justify-center flex-col bg-blue-600 text-white rounded-[20px] px-[20px] py-[40px] w-full sm:w-1/2">
+              <p className="text-2xl font-semibold">Total Appointments</p>
+              <h3 className="text-3xl font-bold">{totalAppointments}</h3>
+            </div>
+            <div className="bg-white flex justify-center flex-col text-pink-500 rounded-[20px] px-[20px] py-[40px] w-full sm:w-1/2">
+              <p className="text-2xl font-semibold">Registered Doctors</p>
+              <h3 className="text-3xl font-bold">{doctorCount}</h3>
+            </div>
           </div>
         </div>
-        <div className="banner">
-          <h5 className="text-lg font-bold">Appointments</h5>
-          <div className="overflow-x-auto">
-            <table className="min-w-full text-sm text-left">
-              <thead className="bg-gray-200">
-                <tr>
-                  <th className="px-4 py-2">Patient</th>
-                  <th className="px-4 py-2">Date</th>
-                  <th className="px-4 py-2">Doctor</th>
-                  <th className="px-4 py-2">Payment</th>
-                  <th className="px-4 py-2">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {appointments && appointments.length > 0 ? (
-                  appointments.map((appointment) => (
-                    <tr key={appointment._id} className="border-b text-sm">
+        <div className="mt-10">
+          <h5 className="text-xl font-bold text-gray-800 mb-5">Appointments</h5>
+          <div className="overflow-x-auto bg-white rounded-lg p-5 shadow-lg">
+            {loading && <Loader />}
+            {error && <Error />}
+            {!loading && !error && appointments.length > 0 ? ( 
+              <table className="min-w-full text-sm text-left">
+                <thead className="bg-gray-200">
+                  <tr>
+                    <th className="px-4 py-2 text-gray-600">Patient</th>
+                    <th className="px-4 py-2 text-gray-600">Date</th>
+                    <th className="px-4 py-2 text-gray-600">Doctor</th>
+                    <th className="px-4 py-2 text-gray-600">Payment</th>
+                    <th className="px-4 py-2 text-gray-600">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {appointments.map((appointment) => (
+                    <tr key={appointment._id} className="border-b">
                       <td className="px-4 py-2">{appointment.user.name}</td>
                       <td className="px-4 py-2">{appointment.createdAt.substring(0, 10)}</td>
                       <td className="px-4 py-2">{appointment.doctor.name}</td>
@@ -137,30 +146,25 @@ const Dashboard = () => {
                               ? "bg-green-200 text-green-700"
                               : "bg-red-200 text-red-700"
                           } block px-2 py-1 text-sm rounded`}
-                          style={{ fontSize: '16px' }} // Apply inline style for font size
                           value={appointment.status}
                           onChange={(e) => handleStatusChange(appointment._id, e.target.value)}
                         >
-                          <option value="pending" className="bg-yellow-200 text-yellow-700" style={{ fontSize: '16px' }}>
+                          <option value="pending" className="bg-yellow-200 text-yellow-700">
                             Pending
                           </option>
-                          <option value="approved" className="bg-green-200 text-green-700" style={{ fontSize: '16px' }}>
+                          <option value="approved" className="bg-green-200 text-green-700">
                             Approved
                           </option>
-                          <option value="cancelled" className="bg-red-200 text-red-700" style={{ fontSize: '16px' }}>
+                          <option value="cancelled" className="bg-red-200 text-red-700">
                             Cancelled
                           </option>
                         </select>
                       </td>
                     </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan="5" className="px-4 py-2 text-center">No Appointments Found!</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
+                  ))}
+                </tbody>
+              </table>) : (<h2 className="text-black text-2xl">No Appointments yet!</h2>)
+            }
           </div>
         </div>
       </section>

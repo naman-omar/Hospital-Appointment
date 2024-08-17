@@ -11,11 +11,7 @@ import { authContext } from "../context/authContext.jsx";
 
 const Sidebar = () => {
   const [show, setShow] = useState(false);
-  const { user } = useContext(authContext); 
-  const { role } = useContext(authContext);
-
-  const { dispatch } = useContext(authContext);
-
+  const { user, role, dispatch } = useContext(authContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -23,33 +19,36 @@ const Sidebar = () => {
     navigate("/admin");
     toast.success("You have successfully logged out");
   };
-  
-  const navigateTo = useNavigate();
 
   const gotoHomePage = () => {
-    navigateTo("/admin/Dashboard");
-    setShow(!show);
-  };
-  const gotoDoctorsPage = () => {
-    navigateTo("admin/doctors");
-    setShow(!show);
-  };
-  const gotoMessagesPage = () => {
-    navigateTo("admin/messages");
-    setShow(!show);
-  };
-  const gotoAddNewAdmin = () => {
-    navigateTo("/admin/addnew");
+    navigate("/admin/Dashboard");
     setShow(!show);
   };
 
-  // Check if the user is logged in and has the admin role
+  const gotoDoctorsPage = () => {
+    navigate("admin/doctors");
+    setShow(!show);
+  };
+
+  const gotoMessagesPage = () => {
+    navigate("admin/messages");
+    setShow(!show);
+  };
+
+  const gotoAddNewAdmin = () => {
+    navigate("/admin/addnew");
+    setShow(!show);
+  };
+
   if (!user || role !== "admin") {
     return null;  
   }
 
   return (
     <section>
+      <div className="wrapper">
+        <GiHamburgerMenu className="hamburger" onClick={() => setShow(!show)} />
+      </div>
       <nav className={show ? "show sidebar" : "sidebar"}>
         <div className="links">
           <TiHome onClick={gotoHomePage} />
@@ -59,10 +58,7 @@ const Sidebar = () => {
           <RiLogoutBoxFill onClick={handleLogout} />
         </div>
       </nav>
-      <div className="wrapper">
-        <GiHamburgerMenu className="hamburger" onClick={() => setShow(!show)} />
-      </div>
-    </section> 
+    </section>
   );
 };
 
