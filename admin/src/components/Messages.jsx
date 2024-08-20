@@ -1,5 +1,5 @@
 import useFetchData from "../../../Frontend/src/hooks/useFetchData";
-import Loader from "../../../Frontend/src/components/Loader/Loading";
+import Loader from "./Loading.jsx";
 import Error from "../../../Frontend/src/components/Error/Error";
 import { useContext, useEffect, useState } from "react";
 import { BASE_URL } from "../../../Frontend/src/config";

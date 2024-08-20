@@ -4,7 +4,7 @@ import { BASE_URL } from "../../../Frontend/src/config.js";
 import { toast } from "react-toastify";
 import useFetchData from "../../../Frontend/src/hooks/useFetchData.js";
 import Error from "../../../Frontend/src/components/Error/Error.jsx";
-import Loader from "../../../Frontend/src/components/Loader/Loading.jsx";
+import Loader from "./Loading.jsx";
 
 const Dashboard = () => {
   const { user, role } = useContext(authContext);
