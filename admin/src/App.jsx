@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from "./components/SideBar";
 import AddNewAdmin from "./components/AddNewAdmin";
+import Home from "./components/Home";
 import "./App.css";
 import "./index.css";
 
@@ -19,6 +20,7 @@ const App = () => {
       <Sidebar />
       <ToastContainer theme="dark" position='top-right' autoClose={3000} closeOnClick pauseOnHover={false} />
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/admin/Dashboard" element={<Dashboard />} />
         <Route path="/admin" element={<Login />} />
         <Route path="/admin/addnew" element={<AddNewAdmin />} />
