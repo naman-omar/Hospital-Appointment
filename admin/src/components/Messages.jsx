@@ -1,8 +1,8 @@
-import useFetchData from "../../../Frontend/src/hooks/useFetchData";
+import useFetchData from "../hooks/useFetchData.js";
 import Loader from "./Loading.jsx";
-import Error from "../../../Frontend/src/components/Error/Error";
+import Error from "./Error.jsx";
 import { useContext, useEffect, useState } from "react";
-import { BASE_URL } from "../../../Frontend/src/config";
+import { BASE_URL } from "../config";
 import { authContext } from "../context/authContext";
 
 const Messages = () => {

@@ -4,7 +4,7 @@ import {HashLoader} from "react-spinners";
 import { toast } from "react-toastify";
 import { useContext, useState } from "react";
 import logo from "../assets/images/logo.png";
-import { BASE_URL } from "../../../Frontend/src/config.js";
+import { BASE_URL } from "../config.js";
 import {authContext} from "../context/authContext.jsx"
 
 const Login = () => {

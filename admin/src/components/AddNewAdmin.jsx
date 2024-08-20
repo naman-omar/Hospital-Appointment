@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { BASE_URL } from "../../../Frontend/src/config.js";
+import { BASE_URL } from "../config.js";
 import {HashLoader} from "react-spinners";
 import logo from "../assets/images/logo.png";
 

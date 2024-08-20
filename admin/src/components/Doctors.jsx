@@ -3,11 +3,11 @@
 import { useContext } from "react";
 import {authContext} from "../context/authContext.jsx"
 import { Navigate } from "react-router-dom";
-import { BASE_URL } from "../../../Frontend/src/config.js";
+import { BASE_URL } from "../config.js";
 import DoctorCard from "./DoctorCard.jsx";
-import Error from "../../../Frontend/src/components/Error/Error.jsx";
+import Error from "./Error.jsx";
 import Loader from "./Loading.jsx";
-import useFetchData from "../../../Frontend/src/hooks/useFetchData.js";
+import useFetchData from "../hooks/useFetchData.js";
 
 const Doctors = () => {
 

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { formatDate } from "../../../Frontend/src/utils/formatDate";
+import { formatDate } from "../utils/formatDate.jsx";
 
 const DoctorAbout = ({ name, about, qualifications, experiences }) => {
   return (

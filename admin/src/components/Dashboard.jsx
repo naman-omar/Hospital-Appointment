@@ -1,9 +1,9 @@
 import { useEffect, useContext, useState } from "react";
 import { authContext } from "../context/authContext.jsx";
-import { BASE_URL } from "../../../Frontend/src/config.js";
+import { BASE_URL } from "../config.js";
 import { toast } from "react-toastify";
-import useFetchData from "../../../Frontend/src/hooks/useFetchData.js";
-import Error from "../../../Frontend/src/components/Error/Error.jsx";
+import useFetchData from "../hooks/useFetchData.js";
+import Error from "./Error.jsx";
 import Loader from "./Loading.jsx";
 
 const Dashboard = () => {

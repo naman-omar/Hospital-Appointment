@@ -1,9 +1,9 @@
 
 import DoctorAbout from "./DoctorAbout.jsx";
-import {BASE_URL} from "../../../Frontend/src/config.js"
-import Error from "../../../Frontend/src/components/Error/Error.jsx"
+import {BASE_URL} from "../config.js"
+import Error from "./Error.jsx"
 import Loader from "./Loading.jsx"
-import useFetchData from '../../../Frontend/src/hooks/useFetchData.js'
+import useFetchData from '../hooks/useFetchData.js'
 import { useParams } from "react-router-dom";
 
 const DoctorDetails = () => {

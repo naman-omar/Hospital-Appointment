@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { BASE_URL } from "../../../Frontend/src/config";
+import { BASE_URL } from "../config.js";
 import { Link } from "react-router-dom";
 import { BsArrowRightCircle } from "react-icons/bs";
 import { toast } from "react-toastify";
