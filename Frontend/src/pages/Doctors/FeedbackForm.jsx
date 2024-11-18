@@ -39,9 +39,9 @@ const FeedbackForm = () => {
       }
 
       setLoading(false);
-      setTimeout(() => {
-        window.location.reload();
-    }, 2000);
+    //   setTimeout(() => {
+    //     window.location.reload();
+    // }, 2000);
     
       toast.success(result.message);
       

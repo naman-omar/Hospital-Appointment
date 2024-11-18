@@ -51,3 +51,4 @@ app.listen(port, () => {
   connectDB();
   console.log(`server is listening to the port ${port}`);
 });
+

@@ -35,24 +35,47 @@ reviewSchema.pre(/^find/, function (next) {
   next();
 });
 
-reviewSchema.statics.calcAverageRatings = async function (doctorId) {
-  const stats = await this.aggregate([
-    {
-      $match: { doctor: doctorId }
-    },
-    {
-      $group: {
-        _id: "$doctor",
-        numOfRating: { $sum: 1 },
-        averageRating: { $avg: "$rating" }
-      }
-    }
-  ]);
+// reviewSchema.statics.calcAverageRatings = async function (doctorId) {
+//   const stats = await this.aggregate([
+//     {
+//       $match: { doctor: doctorId }
+//     },
+//     {
+//       $group: {
+//         _id: "$doctor",
+//         numOfRating: { $sum: 1 },
+//         averageRating: { $avg: "$rating" }
+//       }
+//     }
+//   ]);
 
-  if (stats.length > 0) {
-    const averageRating = Math.round(stats[0].averageRating * 10) / 10;
+//   if (stats.length > 0) {
+//     const averageRating = Math.round(stats[0].averageRating * 10) / 10;
+//     await Doctor.findByIdAndUpdate(doctorId, {
+//       totalRating: stats[0].numOfRating,
+//       averageRating: averageRating
+//     });
+//   } else {
+//     await Doctor.findByIdAndUpdate(doctorId, {
+//       totalRating: 0,
+//       averageRating: 0
+//     });
+//   }
+// };
+
+reviewSchema.statics.calcAverageRatings = async function (doctorId) {
+
+  const reviews = await this.find({ doctor: doctorId });
+
+  if (reviews.length > 0) {
+
+    const totalRating = reviews.length;
+    const averageRating = Math.round(
+      reviews.reduce((acc, review) => acc + review.rating, 0) / totalRating * 10
+    ) / 10;
+
     await Doctor.findByIdAndUpdate(doctorId, {
-      totalRating: stats[0].numOfRating,
+      totalRating: totalRating,
       averageRating: averageRating
     });
   } else {

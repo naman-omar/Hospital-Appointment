@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/:id",authenticate,restrict(['patient','admin']), getSingleUser);
 router.get("/", authenticate,restrict(['admin']),getAllUser);
-router.put("/:id", authenticate,restrict(['patient']),updateUser);
+router.put("/:id", authenticate,restrict(['patient', 'admin']),updateUser);
 router.delete("/deleteUserAccount", authenticate,restrict(['patient','admin']),deleteUserAccount);
 router.get("/profile/me", authenticate,restrict(['patient','admin']), getUserProfile);
 router.get("/appointments/my-appointments", authenticate, restrict(['patient','admin']), getMyAppointments);
