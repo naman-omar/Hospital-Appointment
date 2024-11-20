@@ -71,7 +71,7 @@ export const getUserProfile = async (req, res) => {
 export const getMyAppointments = async (req, res) => {
   try {
     //step1: retrieve appointments from booking
-    const bookings = await Booking.find({ user: req.userId, isPaid: true });
+    const bookings = await Booking.find({ user: req.userId, status: "approved" });
 
     //step2: extract doctor ids from appoitnment bookings
     const doctorIds = bookings.map((el) => el.doctor);

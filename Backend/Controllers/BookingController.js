@@ -83,12 +83,10 @@ export const updateStatus = async (req, res) => {
       const { id } = req.params;
       const { status } = req.body;
   
-      // Validate status value
       if (!['pending', 'approved', 'cancelled'].includes(status)) {
         return res.status(400).json({ message: 'Invalid status value' });
       }
   
-      // Find and update appointment
       const appointment = await Booking.findByIdAndUpdate(id, { status }, { new: true });
   
       if (!appointment) {

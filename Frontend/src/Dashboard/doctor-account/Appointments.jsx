@@ -3,7 +3,7 @@ import { formatDate } from "../../utils/formatDate";
 
 const Appointments = ({ appointments }) => {
     // Filter only the paid appointments
-    const paidAppointments = appointments.filter(item => item.isPaid);
+    const paidAppointments = appointments.filter(item => item.status == "approved");
 
     return (
         <>

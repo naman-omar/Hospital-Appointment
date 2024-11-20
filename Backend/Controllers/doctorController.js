@@ -109,7 +109,7 @@ export const getDoctorProfile = async (req, res) => {
         .json({ success: false, message: "Doctor not found" });
     }
     const { password, ...doctorData } = doctor._doc;
-    const appointments = await Booking.find({ doctor: doctorId });
+    const appointments = await Booking.find({ doctor: doctorId, status: "approved"});
 
     const responseData = {
       ...doctorData,
